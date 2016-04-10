@@ -4,13 +4,14 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:gravity="center">
+	android:background="@color/ballWhite"
+	android:gravity="top|center_horizontal">
 
 	<LinearLayout
 		android:background="@color/colorAccent"
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:layout_gravity="center_horizontal|top"
+		android:layout_gravity="top|center_horizontal"
 		android:orientation="horizontal">
 
 		<Button
@@ -28,9 +29,9 @@
 		    android:layout_weight="1"/>
 
 		<Button
-			android:id="@+id/animals_button"
-			android:text="@string/animals"
-			android:textColor="@color/animals"
+			android:id="@+id/animal_button"
+			android:text="@string/animal"
+			android:textColor="@color/animal"
 			android:background="@color/transparent"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"/>
@@ -42,9 +43,9 @@
 			android:layout_weight="1"/>
 
 		<Button
-			android:id="@+id/elements_button"
-			android:text="@string/elements"
-			android:textColor="@color/elements"
+			android:id="@+id/element_button"
+			android:text="@string/element"
+			android:textColor="@color/element"
 			android:background="@color/transparent"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"/>
@@ -64,5 +65,12 @@
 			android:layout_height="wrap_content"/>
 
 	</LinearLayout>
+
+	<ImageButton
+		android:id="@+id/trash"
+		android:background="@drawable/ic_trash"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|right"/>
 
 </FrameLayout>
