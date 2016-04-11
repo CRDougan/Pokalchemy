@@ -140,15 +140,16 @@ public class GameActivity extends AppCompatActivity {
 	 * <p>update UI when crimes are edited to reflect changes in real time</p>
 	 */
 	public void updateUI() {
-		List<Ingredient> ingredients = new ArrayList<Ingredient>();
-
-		for(int i = 0; i < 25; i++)
-		{
-			ingredients.add(new Ingredient());
-		}
 
 		//setup mPokemon adapter
 		if(mPokemonAdapter == null) {
+			List<Ingredient> ingredients = new ArrayList<Ingredient>();
+			for(int i = 0; i < 11; i++)
+			{
+				Ingredient ingredient = new Ingredient();
+				ingredient.setImageID(R.mipmap.ic_launcher);
+				ingredients.add(ingredient);
+			}
 			mPokemonAdapter = new IngredientAdapter(ingredients);
 			mPokemonRecyclerView.setAdapter(mPokemonAdapter);
 		}
@@ -158,6 +159,13 @@ public class GameActivity extends AppCompatActivity {
 
 		//setup animal adapter
 		if(mAnimalAdapter == null) {
+			List<Ingredient> ingredients = new ArrayList<Ingredient>();
+			for(int i = 0; i < 20; i++)
+			{
+				Ingredient ingredient = new Ingredient();
+				ingredient.setImageID(R.drawable.ic_human);
+				ingredients.add(ingredient);
+			}
 			mAnimalAdapter = new IngredientAdapter(ingredients);
 			mAnimalRecyclerView.setAdapter(mAnimalAdapter);
 		}
@@ -167,6 +175,13 @@ public class GameActivity extends AppCompatActivity {
 
 		//setup element adapter
 		if(mElementAdapter == null) {
+			List<Ingredient> ingredients = new ArrayList<Ingredient>();
+			for(int i = 0; i < 100; i++)
+			{
+				Ingredient ingredient = new Ingredient();
+				ingredient.setImageID(R.drawable.ic_water);
+				ingredients.add(ingredient);
+			}
 			mElementAdapter = new IngredientAdapter(ingredients);
 			mElementRecyclerView.setAdapter(mElementAdapter);
 		}
@@ -176,6 +191,13 @@ public class GameActivity extends AppCompatActivity {
 
 		//setup "mOther" adapter
 		if(mOtherAdapter == null) {
+			List<Ingredient> ingredients = new ArrayList<Ingredient>();
+//			for(int i = 0; i < 3; i++)
+//			{
+//				Ingredient ingredient = new Ingredient();
+//				ingredient.setImageID(R.mipmap.ic_launcher);
+//				ingredients.add(ingredient);
+//			}
 			mOtherAdapter = new IngredientAdapter(ingredients);
 			mOtherRecyclerView.setAdapter(mOtherAdapter);
 		}

@@ -20,6 +20,11 @@ public class Ingredient {
         return mImageID;
     }
 
+    public void setImageID(int id)
+    {
+        mImageID = id;
+    }
+
 
 
 
