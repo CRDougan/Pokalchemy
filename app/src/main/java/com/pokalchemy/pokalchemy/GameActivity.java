@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,12 +34,22 @@ public class GameActivity extends AppCompatActivity {
 
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
+	private FrameLayout mMixer;
+	private LinearLayout mMixingArea;
 	private boolean p_on = false, a_on = false, e_on = false, o_on = false;
 
+	/**
+	 * onCreate method
+	 * <p>sets up all the buttons, recyclerViews, etc.</p>
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+
+		mMixer = (FrameLayout)findViewById(R.id.ingredient_mixer_view);
+		mMixingArea = (LinearLayout)findViewById(R.id.mixing_area);
 
 		mPokemon = (Button)findViewById(R.id.pokemon_button);
 		mPokemon.setOnClickListener(new View.OnClickListener() {
@@ -47,11 +60,19 @@ public class GameActivity extends AppCompatActivity {
 					mPokemon.setTextColor(getResources().getColor(R.color.pokemon));
 					mPokemon.setBackground(getResources().getDrawable(R.color.transparent));
 					mPokemonRecyclerView.setVisibility(View.GONE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight + 1;
+					mMixer.setLayoutParams(mixerParams);
 				} else {
 					p_on = true;
 					mPokemon.setTextColor(getResources().getColor(R.color.colorAccent));
 					mPokemon.setBackground(getResources().getDrawable(R.color.pokemon));
 					mPokemonRecyclerView.setVisibility(View.VISIBLE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight - 1;
+					mMixer.setLayoutParams(mixerParams);
 				}
 			}
 		});
@@ -65,11 +86,19 @@ public class GameActivity extends AppCompatActivity {
 					mAnimals.setTextColor(getResources().getColor(R.color.animal));
 					mAnimals.setBackground(getResources().getDrawable(R.color.transparent));
 					mAnimalRecyclerView.setVisibility(View.GONE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight + 1;
+					mMixer.setLayoutParams(mixerParams);
 				} else {
 					a_on = true;
 					mAnimals.setTextColor(getResources().getColor(R.color.colorAccent));
 					mAnimals.setBackground(getResources().getDrawable(R.color.animal));
 					mAnimalRecyclerView.setVisibility(View.VISIBLE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight - 1;
+					mMixer.setLayoutParams(mixerParams);
 				}
 			}
 		});
@@ -83,11 +112,19 @@ public class GameActivity extends AppCompatActivity {
 					mElements.setTextColor(getResources().getColor(R.color.element));
 					mElements.setBackground(getResources().getDrawable(R.color.transparent));
 					mElementRecyclerView.setVisibility(View.GONE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight + 1;
+					mMixer.setLayoutParams(mixerParams);
 				} else {
 					e_on = true;
 					mElements.setTextColor(getResources().getColor(R.color.colorAccent));
 					mElements.setBackground(getResources().getDrawable(R.color.element));
 					mElementRecyclerView.setVisibility(View.VISIBLE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight - 1;
+					mMixer.setLayoutParams(mixerParams);
 				}
 			}
 		});
@@ -101,11 +138,19 @@ public class GameActivity extends AppCompatActivity {
 					mOther.setTextColor(getResources().getColor(R.color.other));
 					mOther.setBackground(getResources().getDrawable(R.color.transparent));
 					mOtherRecyclerView.setVisibility(View.GONE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight + 1;
+					mMixer.setLayoutParams(mixerParams);
 				} else {
 					o_on = true;
 					mOther.setTextColor(getResources().getColor(R.color.colorAccent));
 					mOther.setBackground(getResources().getDrawable(R.color.other));
 					mOtherRecyclerView.setVisibility(View.VISIBLE);
+
+					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+					mixerParams.weight = mixerParams.weight - 1;
+					mMixer.setLayoutParams(mixerParams);
 				}
 			}
 		});
@@ -114,7 +159,7 @@ public class GameActivity extends AppCompatActivity {
 		mTrash.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #TODO delete all ingredients in mixing area
+				mMixingArea.removeAllViews();
 			}
 		});
 		
@@ -166,7 +211,7 @@ public class GameActivity extends AppCompatActivity {
 			mPokemonAdapter.notifyDataSetChanged();
 		}
 
-		//setup animal adapter
+		//setup mAnimal adapter
 		if(mAnimalAdapter == null) {
 			List<Ingredient> ingredients = new ArrayList<Ingredient>();
 			for(int i = 0; i < 20; i++)
@@ -182,7 +227,7 @@ public class GameActivity extends AppCompatActivity {
 			mAnimalAdapter.notifyDataSetChanged();
 		}
 
-		//setup element adapter
+		//setup mElement adapter
 		if(mElementAdapter == null) {
 			List<Ingredient> ingredients = new ArrayList<Ingredient>();
 			for(int i = 0; i < 100; i++)
@@ -235,8 +280,24 @@ public class GameActivity extends AppCompatActivity {
 			mButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Log.d(LOG, "Clicked on Ingredient buttom");
-					Toast.makeText(v.getContext(), "Added ingerdient to mixing area", Toast.LENGTH_LONG).show();
+					Log.d(LOG, "Clicked on Ingredient button");
+					Toast.makeText(v.getContext(), String.valueOf(mButton.getBackground()), Toast.LENGTH_LONG).show();
+
+					ImageButton ingredientButton = new ImageButton(v.getContext());
+					ingredientButton.setBackground(mButton.getBackground());
+					ingredientButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							// TODO remove from mixer area
+						}
+					});
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+					params.gravity = Gravity.CENTER;
+					mMixingArea.addView(ingredientButton, params);
+
+					if (checkMixer() != null) {
+						Toast.makeText(v.getContext(), "You made a new Pokemon!", Toast.LENGTH_SHORT).show();
+					}
 				}
 			});
 		}
@@ -317,5 +378,18 @@ public class GameActivity extends AppCompatActivity {
 		}
 	}
 
-
+	/**
+	 * Checks the mixing area for a valid combination
+	 * @return the new combined ingredient or null if no combination
+	 */
+	private Ingredient checkMixer() {
+		int waterCount = 0, humanCount = 0;
+		for (int i = 0; i < mMixingArea.getChildCount(); i++) {
+//			mMixingArea.getChildAt(i).getResources();
+		}
+		if (waterCount == 1 && humanCount == 1) {
+			return new Ingredient();
+		}
+		return null;
+	}
 }
