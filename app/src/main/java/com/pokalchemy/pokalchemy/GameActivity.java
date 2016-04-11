@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
 	private IngredientAdapter mOtherAdapter;
 
 	private Button mPokemon, mAnimals, mElements, mOther;
+	private ImageButton mTrash;
 	private boolean p_on = false, a_on = false, e_on = false, o_on = false;
 
 	@Override
@@ -61,13 +62,13 @@ public class GameActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				if (a_on) {
 					a_on = false;
-					mAnimals.setTextColor(getResources().getColor(R.color.animals));
+					mAnimals.setTextColor(getResources().getColor(R.color.animal));
 					mAnimals.setBackground(getResources().getDrawable(R.color.transparent));
 					mAnimalRecyclerView.setVisibility(View.GONE);
 				} else {
 					a_on = true;
 					mAnimals.setTextColor(getResources().getColor(R.color.colorAccent));
-					mAnimals.setBackground(getResources().getDrawable(R.color.animals));
+					mAnimals.setBackground(getResources().getDrawable(R.color.animal));
 					mAnimalRecyclerView.setVisibility(View.VISIBLE);
 				}
 			}
@@ -79,13 +80,13 @@ public class GameActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				if (e_on) {
 					e_on = false;
-					mElements.setTextColor(getResources().getColor(R.color.elements));
+					mElements.setTextColor(getResources().getColor(R.color.element));
 					mElements.setBackground(getResources().getDrawable(R.color.transparent));
 					mElementRecyclerView.setVisibility(View.GONE);
 				} else {
 					e_on = true;
 					mElements.setTextColor(getResources().getColor(R.color.colorAccent));
-					mElements.setBackground(getResources().getDrawable(R.color.elements));
+					mElements.setBackground(getResources().getDrawable(R.color.element));
 					mElementRecyclerView.setVisibility(View.VISIBLE);
 				}
 			}
@@ -109,19 +110,27 @@ public class GameActivity extends AppCompatActivity {
 			}
 		});
 
-		mPokemonRecyclerView = (RecyclerView) findViewById(R.id.pokemon_recycler_view);
+		mTrash = (ImageButton)findViewById(R.id.trash);
+		mTrash.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// #TODO delete all ingredients in mixing area
+			}
+		});
+		
+		mPokemonRecyclerView = (RecyclerView)findViewById(R.id.pokemon_recycler_view);
 		mPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-		mAnimalRecyclerView = (RecyclerView) findViewById(R.id.animal_recycler_view);
+		mAnimalRecyclerView = (RecyclerView)findViewById(R.id.animal_recycler_view);
 		mAnimalRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-		mElementRecyclerView = (RecyclerView) findViewById(R.id.element_recycler_view);
+		mElementRecyclerView = (RecyclerView)findViewById(R.id.element_recycler_view);
 		mElementRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-		mOtherRecyclerView = (RecyclerView) findViewById(R.id.other_recycler_view);
+		mOtherRecyclerView = (RecyclerView)findViewById(R.id.other_recycler_view);
 		mOtherRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 		updateUI();

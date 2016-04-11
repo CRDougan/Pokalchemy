@@ -3,9 +3,10 @@
 	<color name="colorPrimary">#EE1515</color>
 	<color name="colorPrimaryDark">#F00000</color>
 	<color name="colorAccent">#222224</color>
+	<color name="ballWhite">#F0F0F0</color>
 	<color name="pokemon">#55FF55</color>
-	<color name="animals">#FF5555</color>
-	<color name="elements">#5555FF</color>
+	<color name="animal">#FF5555</color>
+	<color name="element">#5555FF</color>
 	<color name="other">#FFFF55</color>
 	<color name="black">#000000</color>
 	<color name="transparent">#00000000</color>

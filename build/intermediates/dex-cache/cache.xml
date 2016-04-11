@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\Connor\AndroidStudioProjects\Pokalchemy\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="C:\Users\Connor\AndroidStudioProjects\Pokalchemy\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_90763b08bf1976d7ea976ffbd33698d49d2d3c16.jar" />
-    </item>
-
-</items>

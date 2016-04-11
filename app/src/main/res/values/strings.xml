@@ -1,7 +1,7 @@
 <resources>
 	<string name="app_name">Pokálchemy</string>
 	<string name="pokemon">Pokémon</string>
-	<string name="animals">Animals</string>
-	<string name="elements">Elements</string>
+	<string name="animal">Animals</string>
+	<string name="element">Elements</string>
 	<string name="other">Other</string>
 </resources>
