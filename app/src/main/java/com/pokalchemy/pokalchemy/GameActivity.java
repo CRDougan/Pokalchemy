@@ -284,11 +284,11 @@ public class GameActivity extends AppCompatActivity {
 					Toast.makeText(v.getContext(), String.valueOf(mButton.getBackground()), Toast.LENGTH_LONG).show();
 
 					ImageButton ingredientButton = new ImageButton(v.getContext());
-					ingredientButton.setBackground(mButton.getBackground());
+					ingredientButton.setBackground(mButton.getDrawable());
 					ingredientButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							// TODO remove from mixer area
+							mMixingArea.removeView(v); // TODO remove from mixer area
 						}
 					});
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
