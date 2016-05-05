@@ -292,6 +292,11 @@ public class GameFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					Log.d(LOG, "Clicked on Ingredient button");
+					if(mMixingArea.getChildCount() >= 3)
+					{
+						Toast.makeText(v.getContext(), "There are too many ingredients already. Cannot add more.", Toast.LENGTH_LONG).show();
+						return;
+					}
 					Toast.makeText(v.getContext(), String.valueOf(mButton.getBackground()), Toast.LENGTH_LONG).show();
 
 					ImageButton ingredientButton = new ImageButton(v.getContext());
@@ -299,7 +304,7 @@ public class GameFragment extends Fragment {
 					ingredientButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							mMixingArea.removeView(v); // TODO remove from mixer area
+							mMixingArea.removeView(v);
 						}
 					});
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
