@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="top">
+
+	<LinearLayout
+		android:background="@color/colorAccent"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_gravity="center_horizontal|top"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/pokemon_button"
+			android:text="@string/pokemon"
+			android:textColor="@color/pokemon"
+			android:background="@color/transparent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:background="@color/transparent"
+		    android:layout_weight="1"/>
+
+		<Button
+			android:id="@+id/animals_button"
+			android:text="@string/animal"
+			android:textColor="@color/animal"
+			android:background="@color/transparent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:background="@color/transparent"
+			android:layout_weight="1"/>
+
+		<Button
+			android:id="@+id/elements_button"
+			android:text="@string/element"
+			android:textColor="@color/element"
+			android:background="@color/transparent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:background="@color/transparent"
+			android:layout_weight="1"/>
+
+		<Button
+			android:id="@+id/other_button"
+			android:text="@string/other"
+			android:textColor="@color/other"
+			android:background="@color/transparent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+	<android.support.v7.widget.RecyclerView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:id="@+id/pokemon_recycler_view"
+		android:layout_weight="1"
+		android:visibility="gone"
+	    android:layout_margin="2dp"
+		>
+	</android.support.v7.widget.RecyclerView>
+
+	<android.support.v7.widget.RecyclerView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:id="@+id/animal_recycler_view"
+		android:layout_weight="1"
+		android:visibility="gone"
+	    android:layout_margin="2dp"
+		>
+	</android.support.v7.widget.RecyclerView>
+
+	<android.support.v7.widget.RecyclerView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:id="@+id/element_recycler_view"
+		android:layout_weight="1"
+		android:visibility="gone"
+	    android:layout_margin="2dp"
+		>
+	</android.support.v7.widget.RecyclerView>
+
+	<android.support.v7.widget.RecyclerView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:id="@+id/other_recycler_view"
+		android:layout_weight="1"
+		android:visibility="gone"
+	    android:layout_margin="2dp"
+
+		>
+	</android.support.v7.widget.RecyclerView>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="9"
+		android:id="@+id/ingredient_mixer_view">
+
+		<LinearLayout
+			android:id="@+id/mixing_area"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="horizontal">
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/trash"
+			android:background="@drawable/ic_trash"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|right"/>
+
+	</FrameLayout>
+
+
+</LinearLayout>
