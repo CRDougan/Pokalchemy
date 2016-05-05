@@ -1,6 +1,13 @@
-This document describes the usage instructions, known bugs, and any other things worth mentioning about the app.
+Choolof Engineering
+Jacob Davis
+Connor Dougan
+Gracie Petty
 
-USAGE:
+jajdavis@mymail.mines.edu
+crdougan@mymail.mines.edu
+gpetty@mymail.mines.edu
 
+Final Project - Alpha Release
+Pokalchemy
 
-BUGS:
+Please see Usage.txt for a description of what the project does, usage instructions, and bugs
