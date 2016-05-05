@@ -1,0 +1,12 @@
+This document describes the usage instructions, known bugs, and any other things worth mentioning about the app.
+
+USAGE:
+The goal of our app is to combine ingrediants from different categories chosen at the top into new pokemon. To do this tap on one or more selection groups then tap on the ingredient you want to add to the mixing area. The ingredients will be automatically mixed once in the mixing area if they create a valid match.
+
+BUGS:
+Currently we are having troubles with images and they do not appear in the mixing area when they are added.
+Also, we therefore can't compare what's in the mixing area and cannot combine the ingredients into new pokemon.
+
+NOTE:
+We have not added all of the ingredients we intend to use and merely have substitutes in the selection groups.
+One example of a combination would be <Element> Electricity + <Animal> Mouse = <Pokemon> Pikachu.
