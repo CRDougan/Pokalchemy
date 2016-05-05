@@ -175,19 +175,19 @@ public class GameFragment extends Fragment {
 		});
 
 		mPokemonRecyclerView = (RecyclerView)v.findViewById(R.id.pokemon_recycler_view);
-		mPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+		mPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
 
 		mAnimalRecyclerView = (RecyclerView)v.findViewById(R.id.animal_recycler_view);
-		mAnimalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+		mAnimalRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
 
 		mElementRecyclerView = (RecyclerView)v.findViewById(R.id.element_recycler_view);
-		mElementRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+		mElementRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
 
 		mOtherRecyclerView = (RecyclerView)v.findViewById(R.id.other_recycler_view);
-		mOtherRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+		mOtherRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
 		updateUI();
 
