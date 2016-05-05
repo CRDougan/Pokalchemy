@@ -39,6 +39,8 @@ public class GameFragment extends Fragment {
 	private LinearLayout mMixingArea;
 	private boolean p_on = false, a_on = false, e_on = false, o_on = false;
 
+	private ArrayList<Ingredient> mMixerIngredients;
+
 
 	/**
 	 * Create new instance
@@ -55,7 +57,7 @@ public class GameFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_game, container, false);
 
-		//v.setContentView(R.layout.fragment_game);
+		mMixerIngredients = new ArrayList<Ingredient>();
 
 		mMixer = (FrameLayout)v.findViewById(R.id.ingredient_mixer_view);
 		mMixingArea = (LinearLayout)v.findViewById(R.id.mixing_area);
@@ -213,6 +215,8 @@ public class GameFragment extends Fragment {
 			{
 				Ingredient ingredient = new Ingredient();
 				ingredient.setImageID(R.mipmap.ic_launcher);
+				ingredient.setName("Android");
+				ingredient.setType(Ingredient.INGREDIENT_TYPE.POKEMON);
 				ingredients.add(ingredient);
 			}
 			mPokemonAdapter = new IngredientAdapter(ingredients);
@@ -229,6 +233,8 @@ public class GameFragment extends Fragment {
 			{
 				Ingredient ingredient = new Ingredient();
 				ingredient.setImageID(R.drawable.ic_human);
+				ingredient.setName("Human");
+				ingredient.setType(Ingredient.INGREDIENT_TYPE.ANIMAL);
 				ingredients.add(ingredient);
 			}
 			mAnimalAdapter = new IngredientAdapter(ingredients);
@@ -245,6 +251,8 @@ public class GameFragment extends Fragment {
 			{
 				Ingredient ingredient = new Ingredient();
 				ingredient.setImageID(R.drawable.ic_water);
+				ingredient.setName("Water");
+				ingredient.setType(Ingredient.INGREDIENT_TYPE.ELEMENT);
 				ingredients.add(ingredient);
 			}
 			mElementAdapter = new IngredientAdapter(ingredients);
@@ -274,8 +282,9 @@ public class GameFragment extends Fragment {
 
 	private class IngredientHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-
+		private Ingredient mHolderIngredient;
 		private ImageButton mButton;
+
 
 		/**
 		 * Constructor
@@ -299,12 +308,19 @@ public class GameFragment extends Fragment {
 					}
 					Toast.makeText(v.getContext(), String.valueOf(mButton.getBackground()), Toast.LENGTH_LONG).show();
 
+					mMixerIngredients.add(mHolderIngredient);
+
 					ImageButton ingredientButton = new ImageButton(v.getContext());
 					ingredientButton.setBackground(mButton.getDrawable());
 					ingredientButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							mMixingArea.removeView(v);
+							for (int i = 0; i < mMixerIngredients.size(); i++) {
+								if (mMixerIngredients.get(i).getName() == mHolderIngredient.getName()) {
+									mMixerIngredients.remove(i);
+								}
+							}
 						}
 					});
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -323,9 +339,10 @@ public class GameFragment extends Fragment {
 		 * <p>Binds crime details to view</p>
 		 * @param i the crime
 		 */
-		public void bindCrime(Ingredient i){
+		public void bindIngredient(Ingredient i){
 			//TODO: Set the image here
 			mButton.setImageResource(i.getImageID());
+			mHolderIngredient = i;
 		}
 
 		/**
@@ -341,7 +358,7 @@ public class GameFragment extends Fragment {
 	}
 
 	/**
-	 * Crime adapter class
+	 * Ingredient adapter class
 	 * <p>manages viewholders</p>
 	 */
 	private class IngredientAdapter extends RecyclerView.Adapter<IngredientHolder>{
@@ -362,7 +379,7 @@ public class GameFragment extends Fragment {
 		 * <p>creates a viewholder and inflates it</p>
 		 * @param parent parent for view
 		 * @param viewType type for view
-		 * @return a CrimeHolder
+		 * @return a IngredientHolder
 		 */
 		@Override
 		public IngredientHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -373,7 +390,7 @@ public class GameFragment extends Fragment {
 		}
 
 		/**
-		 * Binds Crime to holder
+		 * Binds Ingredient to holder
 		 * <p>Binds a crime to a holder</p>
 		 * @param holder the holder
 		 * @param position the position of the holder
@@ -381,7 +398,7 @@ public class GameFragment extends Fragment {
 		@Override
 		public void onBindViewHolder(IngredientHolder holder, int position) {
 			Ingredient ingredient = mIngredients.get(position);
-			holder.bindCrime(ingredient);
+			holder.bindIngredient(ingredient);
 		}
 
 		/**
@@ -399,11 +416,20 @@ public class GameFragment extends Fragment {
 	 * @return the new combined ingredient or null if no combination
 	 */
 	private Ingredient checkMixer() {
-		int waterCount = 0, humanCount = 0;
+		int waterCount = 0, androidCount = 0;
 		for (int i = 0; i < mMixingArea.getChildCount(); i++) {
-//			mMixingArea.getChildAt(i).getResources();
+			Log.i("pokemon", mMixerIngredients.get(i).getName());
+			if(mMixerIngredients.get(i).getName() == "Android")
+			{
+				androidCount++;
+			}
+			else if(mMixerIngredients.get(i).getName() == "Water")
+			{
+				waterCount++;
+			}
 		}
-		if (waterCount == 1 && humanCount == 1) {
+		if (waterCount == 1 && androidCount == 1) {
+			Toast.makeText(getContext(), "You made a human!", Toast.LENGTH_LONG).show();
 			return new Ingredient();
 		}
 		return null;
