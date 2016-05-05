@@ -16,6 +16,13 @@ public class Ingredient {
         mType = INGREDIENT_TYPE.ANIMAL;
     }
 
+    public Ingredient(Ingredient other)
+    {
+        this.mImageID = other.getImageID();
+        this.mName = other.getName();
+        this.mType = other.getType();
+    }
+
     public int getImageID()
     {
         return mImageID;

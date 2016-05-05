@@ -3,7 +3,6 @@ package com.pokalchemy.pokalchemy;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Connor on 5/3/2016.
@@ -22,7 +21,7 @@ public class PokedexCursorWrapper extends CursorWrapper{
      * <p>Gets a row of data from our table and returns it as an object</p>
      * @return An onject representation of the data
      */
-        public Ingredient getPokedex(){
+        public PokedexEntry getPokedex(){
             String name = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.NAME));
             String first = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.FIRST_INGREDIENT));
             String second = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT));
@@ -30,7 +29,8 @@ public class PokedexCursorWrapper extends CursorWrapper{
             String sensor = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.SENSOR));
             int type = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.TYPE));
             int image = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.IMAGE));
-            int discovered = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.DISCOVERED));
+            int d = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.DISCOVERED));
+            boolean discovered = (d != 0 ? true : false);
 
             //TODO: make this work with ingredient
             //Do this by making a "PokedexEntry" object with Ingredient and sensor, discovered, first,...
@@ -53,7 +53,15 @@ public class PokedexCursorWrapper extends CursorWrapper{
                     break;
             }
 
+            PokedexEntry pokedexEntry = new PokedexEntry();
+            pokedexEntry.setIngredient(ingredient);
+            pokedexEntry.setFirstIngredient(first);
+            pokedexEntry.setSecondIngerdient(second);
+            pokedexEntry.setThirdIngredient(third);
+            pokedexEntry.setSensor(sensor);
+            pokedexEntry.setDiscovered(discovered);
 
-            return ingredient;
+
+            return pokedexEntry;
         }
     }
