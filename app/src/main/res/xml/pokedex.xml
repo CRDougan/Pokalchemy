@@ -4,6 +4,5 @@
     <record name="Mouse" first="" second="" third="" sensor="" type="ANIMAL" image="ic_mouse" discovered="1" />
     <record name="Pikachu" first="Electric" second="Mouse" third="" sensor="" type="POKEMON" image="ic_pikachu" discovered="0" />
 
-    <record></record>
 
 </PreferenceScreen>

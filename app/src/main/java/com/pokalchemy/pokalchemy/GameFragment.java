@@ -41,6 +41,9 @@ public class GameFragment extends Fragment {
 
 	private ArrayList<Ingredient> mMixerIngredients;
 
+	private PokedexLab mPokedexLab;
+	private ArrayList<Ingredient> mPokedex;
+
 
 	/**
 	 * Create new instance
@@ -56,6 +59,9 @@ public class GameFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_game, container, false);
+
+		mPokedexLab = PokedexLab.get(getContext());
+		mPokedex = PokedexLab
 
 		mMixerIngredients = new ArrayList<Ingredient>();
 

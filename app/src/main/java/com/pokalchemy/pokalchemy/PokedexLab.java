@@ -22,7 +22,6 @@ public class PokedexLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    private ArrayList<PokedexEntry> mPokedex;
 
     /**
      * Create a new PokedexLab in the context
