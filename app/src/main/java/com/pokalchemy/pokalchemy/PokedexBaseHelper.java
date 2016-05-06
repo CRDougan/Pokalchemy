@@ -67,10 +67,24 @@ public class PokedexBaseHelper extends SQLiteOpenHelper {
                 //Search for record tags
                 if ((eventType == XmlPullParser.START_TAG) &&(xml.getName().equals("record"))){
                     //Record tag found, now get values and insert record
-                    String title = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.NAME);
-                    String color = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.NAME);
-                    values.put(PokedexDBSchema.PokedexTable.NAME, title);
-                    values.put(PokedexDBSchema.PokedexTable.NAME, color);
+                    String name = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.NAME);
+                    String first = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.FIRST_INGREDIENT);
+                    String second = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT);
+                    String third = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.THIRD_INGREDIENT);
+                    String sensor = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.SENSOR);
+                    String type = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.TYPE);
+                    String image = xml.getAttributeValue(null, PokedexDBSchema.PokedexTable.Cols.IMAGE);
+                    int discovered = xml.getAttributeIntValue(null, PokedexDBSchema.PokedexTable.Cols.DISCOVERED, 0);
+
+
+                    values.put(PokedexDBSchema.PokedexTable.Cols.NAME, name);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.FIRST_INGREDIENT, first);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT, second);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.THIRD_INGREDIENT, third);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.SENSOR, sensor);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, type);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.IMAGE, image);
+                    values.put(PokedexDBSchema.PokedexTable.Cols.DISCOVERED, discovered);
                     db.insert(PokedexDBSchema.PokedexTable.NAME, null, values);
                 }
                 eventType = xml.next();

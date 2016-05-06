@@ -211,14 +211,14 @@ public class GameFragment extends Fragment {
 		//setup mPokemon adapter
 		if(mPokemonAdapter == null) {
 			List<Ingredient> ingredients = new ArrayList<Ingredient>();
-			for(int i = 0; i < 11; i++)
-			{
-				Ingredient ingredient = new Ingredient();
-				ingredient.setImageID(R.mipmap.ic_launcher);
-				ingredient.setName("Android");
-				ingredient.setType(Ingredient.INGREDIENT_TYPE.POKEMON);
-				ingredients.add(ingredient);
-			}
+//			for(PokedexEntry entry : )
+//			{
+//				Ingredient ingredient = new Ingredient();
+//				ingredient.setImageID("ic_launcher");
+//				ingredient.setName("Android");
+//				ingredient.setType(Ingredient.INGREDIENT_TYPE.POKEMON);
+//				ingredients.add(ingredient);
+//			}
 			mPokemonAdapter = new IngredientAdapter(ingredients);
 			mPokemonRecyclerView.setAdapter(mPokemonAdapter);
 		}
@@ -232,7 +232,7 @@ public class GameFragment extends Fragment {
 			for(int i = 0; i < 20; i++)
 			{
 				Ingredient ingredient = new Ingredient();
-				ingredient.setImageID(R.drawable.ic_human);
+				ingredient.setImageID("ic_human");
 				ingredient.setName("Human");
 				ingredient.setType(Ingredient.INGREDIENT_TYPE.ANIMAL);
 				ingredients.add(ingredient);
@@ -250,7 +250,7 @@ public class GameFragment extends Fragment {
 			for(int i = 0; i < 100; i++)
 			{
 				Ingredient ingredient = new Ingredient();
-				ingredient.setImageID(R.drawable.ic_water);
+				ingredient.setImageID("ic_water");
 				ingredient.setName("Water");
 				ingredient.setType(Ingredient.INGREDIENT_TYPE.ELEMENT);
 				ingredients.add(ingredient);
@@ -341,7 +341,8 @@ public class GameFragment extends Fragment {
 		 */
 		public void bindIngredient(Ingredient i){
 			//TODO: Set the image here
-			mButton.setImageResource(i.getImageID());
+			int id = getContext().getResources().getIdentifier(i.getImageID(), "drawable", getContext().getPackageName());
+			mButton.setImageResource(id);
 			mHolderIngredient = i;
 		}
 

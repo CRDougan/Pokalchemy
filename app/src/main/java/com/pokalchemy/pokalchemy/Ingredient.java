@@ -4,16 +4,16 @@ package com.pokalchemy.pokalchemy;
  * Created by Connor on 4/10/2016.
  */
 public class Ingredient {
-    private int mImageID;
+    private String mImageID;
     private String mName;
     private INGREDIENT_TYPE mType;
 
 
     public Ingredient()
     {
-        mImageID = R.drawable.ic_human;
-        mName = "Human";
-        mType = INGREDIENT_TYPE.ANIMAL;
+        mImageID = "";
+        mName = "";
+        mType = INGREDIENT_TYPE.OTHER;
     }
 
     public Ingredient(Ingredient other)
@@ -23,12 +23,12 @@ public class Ingredient {
         this.mType = other.getType();
     }
 
-    public int getImageID()
+    public String getImageID()
     {
         return mImageID;
     }
 
-    public void setImageID(int id)
+    public void setImageID(String id)
     {
         mImageID = id;
     }

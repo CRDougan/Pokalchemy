@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Connor on 5/3/2016.
@@ -20,6 +21,8 @@ public class PokedexLab {
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
+
+    private ArrayList<PokedexEntry> mPokedex;
 
     /**
      * Create a new PokedexLab in the context

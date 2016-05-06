@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <record title="Dog" color="Brown" />
-    <record title="Cat" color="Gray" />
-    <record title="Rabbit" color="White" />
-    <record title="Spider" color="Black" />
+    <record name="Electric" first="" second="" third="" sensor="" type="ELEMENT" image="ic_electric" discovered="1" />
+    <record name="Mouse" first="" second="" third="" sensor="" type="ANIMAL" image="ic_mouse" discovered="1" />
+    <record name="Pikachu" first="Electric" second="Mouse" third="" sensor="" type="POKEMON" image="ic_pikachu" discovered="0" />
+
+    <record></record>
 
 </PreferenceScreen>

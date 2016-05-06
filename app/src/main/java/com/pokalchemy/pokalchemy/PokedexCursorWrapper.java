@@ -27,9 +27,10 @@ public class PokedexCursorWrapper extends CursorWrapper{
             String second = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT));
             String third = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.THIRD_INGREDIENT));
             String sensor = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.SENSOR));
-            int type = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.TYPE));
-            int image = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.IMAGE));
+            String type = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.TYPE));
+            String image = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.IMAGE));
             int d = getInt(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.DISCOVERED));
+
             boolean discovered = (d != 0 ? true : false);
 
             //TODO: make this work with ingredient
@@ -39,13 +40,13 @@ public class PokedexCursorWrapper extends CursorWrapper{
             ingredient.setImageID(image);
             switch (type)
             {
-                case 0:
+                case "POKEMON":
                     ingredient.setType(Ingredient.INGREDIENT_TYPE.POKEMON);
                     break;
-                case 1:
+                case "ANIMAL":
                     ingredient.setType(Ingredient.INGREDIENT_TYPE.ANIMAL);
                     break;
-                case 2:
+                case "ELEMENT":
                     ingredient.setType(Ingredient.INGREDIENT_TYPE.ELEMENT);
                     break;
                 default:
