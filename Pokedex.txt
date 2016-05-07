@@ -8,23 +8,30 @@ Charmander	Fire		+	Dinosaur					(Any order)
 
 Squirtle	Squirrel	+	Turtle						(In this order)
 
-Ekans		Snake														&	Rotate the device 180 degrees with the screen facing towards you
-Arbok		Snake		+	Poison						(Any order)		&	Rotate the device 180 degrees with the screen facing towards you
+Ekans		Snake															&	Rotate the device 180 degrees with the screen facing towards you
+Arbok		Snake		+	Poison						(Any order)			&	Rotate the device 180 degrees with the screen facing towards you
 
 Pikachu		Electric	+	Mouse						(Any order)
 
 Mankey		Human		+	Dinosaur					(Any order)
-Primeape	Mankey														&	Shake the device
+Primeape	Mankey															&	Shake the device
+
+Machop		Machamp		+	Machamp						
+Machoke		Machop		+	Poison						(Any order)
+Machamp		Arm			+	Human		+	Arm			(In this order)
 
 Geodude		Arm			+	Rock		+	Arm			(In this order)
 Graveler	Geodude		+	Geodude						
 Golem		Trainer		+	Graveler	+	Trainer		(In this order)
 
-Ghastly																	&	Dark ambient light
-Haunter		Arm			+	Ghastly		+	Arm			(In this order)	&	Dark ambient light
-Gengar		Trainer		+	Haunter		+	Trainer		(In this order)	&	Dark ambient light
+Ghastly																		&	Dark ambient light
+Haunter		Arm			+	Ghastly		+	Arm			(In this order)		&	Dark ambient light
+Gengar		Trainer		+	Haunter		+	Trainer		(In this order)		&	Dark ambient light
 
 Onix		Rock		+	Rock		+	Rock		
+
+Koffing		Human		+	Poison						(Any order)
+Wheezing	Koffing		+	Koffing						
 
 Aerodactyl	Rock		+	Bird		+	Dinosaur	(Any order)
 

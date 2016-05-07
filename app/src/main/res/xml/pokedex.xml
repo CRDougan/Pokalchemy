@@ -22,6 +22,13 @@
 
     <record name="Primeape" first="Mankey" second="" third="" sensor="Shake" type="POKEMON" image="ic_primeape" discovered="0" />
 
+    <record name="Machop" first="Machamp" second="Machamp" third="" sensor="" type="POKEMON" image="ic_machop" discovered="0" />
+
+    <record name="Machoke" first="Machop" second="Poison" third="" sensor="" type="POKEMON" image="ic_machoke" discovered="0" />
+    <record name="Machoke" first="Machop" second="Poison" third="" sensor="" type="POKEMON" image="ic_machoke" discovered="0" />
+
+    <record name="Machamp" first="Arm" second="Human" third="Arm" sensor="" type="POKEMON" image="ic_machamp" discovered="0" />
+
     <record name="Geodude" first="Arm" second="Rock" third="Arm" sensor="" type="POKEMON" image="ic_geodude" discovered="0" />
 
     <record name="Graveler" first="Geodude" second="Geodude" third="" sensor="" type="POKEMON" image="ic_graveler" discovered="0" />
@@ -35,6 +42,11 @@
     <record name="Gengar" first="Trainer" second="Haunter" third="Trainer" sensor="Dark" type="POKEMON" image="ic_gengar" discovered="0" />
 
     <record name="Onix" first="Rock" second="Rock" third="Rock" sensor="" type="POKEMON" image="ic_onix" discovered="0" />
+
+    <record name="Koffing" first="Human" second="Poison" third="" sensor="" type="POKEMON" image="ic_koffing" discovered="0" />
+    <record name="Koffing" first="Poison" second="Human" third="" sensor="" type="POKEMON" image="ic_koffing" discovered="0" />
+
+    <record name="Wheezing" first="Koffing" second="Koffing" third="" sensor="" type="POKEMON" image="ic_wheezing" discovered="0" />
 
     <record name="Aerodactyl" first="Dinosaur" second="Bird" third="Rock" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
     <record name="Aerodactyl" first="Dinosaur" second="Rock" third="Bird" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
