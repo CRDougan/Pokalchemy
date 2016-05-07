@@ -481,6 +481,10 @@ public class GameFragment extends Fragment {
 					mPokedex.get(i).setDiscovered(true);
 					Log.i(CHECK, mPokedex.get(i).getIngredient().getName() + " has been discovered: " + mPokedex.get(i).isDiscovered());
 					mPokedexLab.updatePokedex(mPokedex.get(i));
+
+					//Remove everything from the mixing area and replace it with the newly created entry
+					mMixerIngredients.clear();
+					mMixingArea.removeAllViews();
 				}
 			}
 			updateUI();
