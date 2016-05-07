@@ -35,20 +35,25 @@ import java.util.List;
  */
 public class GameFragment extends Fragment {
 
+	//static variables
 	private static final String LOG = "LOGGING";
 	private static final String CHECK = "mixer area";
 	private static final int SHAKE_THRESHOLD = 400;
 
+	//RecyclerViews
 	private RecyclerView mPokemonRecyclerView;
 	private RecyclerView mAnimalRecyclerView;
 	private RecyclerView mElementRecyclerView;
 	private RecyclerView mOtherRecyclerView;
 
+	//RecyclerView Adapters
 	private IngredientAdapter mPokemonAdapter;
 	private IngredientAdapter mAnimalAdapter;
 	private IngredientAdapter mElementAdapter;
 	private IngredientAdapter mOtherAdapter;
 
+	//Sensor variables
+	private OrientationEventListener mOrientationEventListener;
 	private SensorManager mSensorManager;
 	private boolean isDark = false;
 	private boolean isShaking = false;
@@ -56,18 +61,20 @@ public class GameFragment extends Fragment {
 	private double x, y , z, last_x, last_y, last_z;
 	private boolean isFlipped = false;
 
+	//Buttons and other views
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
 	private FrameLayout mMixer;
 	private LinearLayout mMixingArea;
+
+	//Control booleans
 	private boolean p_on = false, a_on = false, e_on = false, o_on = false;
 	private boolean pokedexOn = false;
 
+	//Data storage
 	private ArrayList<Ingredient> mMixerIngredients;
-
 	private PokedexLab mPokedexLab;
 	private ArrayList<PokedexEntry> mPokedex;
-	private OrientationEventListener mOrientationEventListener;
 
 	/**
 	 * Create new instance
@@ -80,25 +87,34 @@ public class GameFragment extends Fragment {
 	}
 
 	/**
-	 *
-	 * @param inflater
-	 * @param container
-	 * @param savedInstanceState
-	 * @return
+	 * onCreateView method for GameFragment
+	 * <p>This method acts like an onCreate method. This method initialized most member variables.
+	 * This method also handles sensor setup. Naturally this method also sets up the GUI elements and adds them to the view.</p>
+	 * @param inflater the inflater
+	 * @param container the container
+	 * @param savedInstanceState the bundle
+	 * @return the view the fragment uses
 	 */
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_game, container, false);
+
+		//We have an options menu!
 		setHasOptionsMenu(true);
+
+		//Set up the data from the database
 		mPokedexLab = PokedexLab.get(getContext());
 		mPokedex = (ArrayList<PokedexEntry>) mPokedexLab.getPokedex();
 
+		//List of actively used ingredients
 		mMixerIngredients = new ArrayList<Ingredient>();
 
+		//Set up the view for the mixing area
 		mMixer = (FrameLayout)v.findViewById(R.id.ingredient_mixer_view);
 		mMixingArea = (LinearLayout)v.findViewById(R.id.mixing_area);
 
+		//initialize sensor variables
 		lastUpdate = 0;
 		x = 0;
 		y = 0;
@@ -107,22 +123,28 @@ public class GameFragment extends Fragment {
 		last_y = 0;
 		last_z = 0;
 
+		//Set up the buttons along the top
+
+		//Pokemon Button ~ Example for the other buttons
 		mPokemon = (Button)v.findViewById(R.id.pokemon_button);
 		mPokemon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (p_on) {
+					//toggle the button, change colors, and hide the recycler view
 					p_on = false;
 					mPokemon.setTextColor(getResources().getColor(R.color.pokemon));
 					mPokemon.setBackground(getResources().getDrawable(R.color.transparent));
 					mPokemonRecyclerView.setVisibility(View.GONE);
 
+					//if this section is empty, don't display it!
 					if(mPokemonAdapter != null && mPokemonAdapter.getItemCount() > 0) {
 						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
 						mixerParams.weight = mixerParams.weight + 1;
 						mMixer.setLayoutParams(mixerParams);
 					}
 				} else {
+					//See comments above - same concept
 					p_on = true;
 					mPokemon.setTextColor(getResources().getColor(R.color.colorAccent));
 					mPokemon.setBackground(getResources().getDrawable(R.color.pokemon));
@@ -259,6 +281,7 @@ public class GameFragment extends Fragment {
 		mOrientationEventListener.enable();
 
 
+		//Add the Trash button
 		mTrash = (ImageButton)v.findViewById(R.id.trash);
 		mTrash.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -268,6 +291,7 @@ public class GameFragment extends Fragment {
 			}
 		});
 
+		//Add the RecyclerViews to the view
 		mPokemonRecyclerView = (RecyclerView)v.findViewById(R.id.pokemon_recycler_view);
 		mPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 		mPokemonRecyclerView.setBackgroundColor(getResources().getColor(R.color.pokemon));
@@ -287,6 +311,7 @@ public class GameFragment extends Fragment {
 		mOtherRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
 		mOtherRecyclerView.setBackgroundColor(getResources().getColor(R.color.other));
 
+		//update the UI after setup is complete
 		updateUI();
 
 		return v;
@@ -318,6 +343,7 @@ public class GameFragment extends Fragment {
 		switch (item.getItemId()) {
 			case R.id.action_pokedex:
 				pokedexOn = !pokedexOn;
+				//this disables the buttons to show the user how many pokemon are missing
 				if(pokedexOn)
 				{
 					Toast.makeText(getContext(), "All ingredients disabled while in Pokedex mode", Toast.LENGTH_LONG).show();
@@ -348,33 +374,45 @@ public class GameFragment extends Fragment {
 		//setup mPokemon adapter
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
+		//count how many pokemon we have seen
 		int totalPokemon = 0;
 		int seenPokemon = 0;
+
+		//Populate the recyclerViews with ingredients we have seen
 		for(PokedexEntry entry : mPokedex)
 		{
+			//If we have the right type of ingredient
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON)
 			{
+				//If this isn't a duplicate ingredient
 				if (addIngredient(ingredients, entry))
 				{
 					totalPokemon++;
+					//If we have discovered the ingredient
 					if(entry.isDiscovered())
 					{
 						seenPokemon++;
+						//make sure the right image displays
 						entry.getIngredient().setImageID(entry.getIngredient().getOriginalImageID());
 						ingredients.add(entry.getIngredient());
 
 					}
+					//Otherwise, is pokedex mode on?
 					else if (pokedexOn) {
+						//show a ?
 						entry.getIngredient().setImageID("ic_undiscovered");
 						ingredients.add(entry.getIngredient());
 					}
 				}
 			}
 		}
+		//Check if we have caught them all
 		if(seenPokemon == totalPokemon)
 		{
 			Toast.makeText(getContext(), "You caught 'em all!", Toast.LENGTH_LONG).show();
 		}
+
+		//Do the same for the other recycler views
 		mPokemonAdapter = new IngredientAdapter(ingredients);
 		mPokemonRecyclerView.setAdapter(mPokemonAdapter);
 
@@ -488,23 +526,28 @@ public class GameFragment extends Fragment {
 			mButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					//check if we can add more to the mixing area
 					if(mMixingArea.getChildCount() >= 3)
 					{
 						Toast.makeText(v.getContext(), "There are too many ingredients already. Cannot add more.", Toast.LENGTH_LONG).show();
 						return;
 					}
 
+					//add the ingredient to the mixing area
 					mMixerIngredients.add(mHolderIngredient);
 
+					//show the ingredient and setup the button
 					ImageButton ingredientButton = new ImageButton(v.getContext());
 					ingredientButton.setBackground(mButton.getDrawable());
 					ingredientButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
+							//Remove this ingredient from the mix area
 							mMixingArea.removeView(v);
 							for (int i = 0; i < mMixerIngredients.size(); i++) {
 								if (mMixerIngredients.get(i).getName() == mHolderIngredient.getName()) {
 									mMixerIngredients.remove(i);
+									//once we have removed it, see if any combinations happen
 									checkMixer();
 								}
 							}
@@ -515,11 +558,12 @@ public class GameFragment extends Fragment {
 					mMixingArea.addView(ingredientButton, params);
 
 					if (checkMixer() != null) {
-						//sdlfsh
+						//do nothing
 					}
 				}
 			});
 
+			//if we are in pokedex mode, we don't want them adding unknown ingredients, so disable the buttons
 			if(pokedexOn)
 			{
 				mButton.setEnabled(false);
@@ -537,9 +581,10 @@ public class GameFragment extends Fragment {
 		 * @param i the ingredient
 		 */
 		public void bindIngredient(Ingredient i){
-			//TODO: Set the image here
+			//Set the image
 			int id = getContext().getResources().getIdentifier(i.getImageID(), "drawable", getContext().getPackageName());
 			mButton.setImageResource(id);
+			//set the ingredient
 			mHolderIngredient = i;
 			switch (mHolderIngredient.getType())
 			{
@@ -566,8 +611,7 @@ public class GameFragment extends Fragment {
 		 */
 		@Override
 		public void onClick(View v) {
-			//nothing?
-
+			//nothing
 		}
 	}
 
@@ -632,6 +676,7 @@ public class GameFragment extends Fragment {
 	private Ingredient checkMixer() {
 		//create an entry to use to query the db
 		PokedexEntry entry = new PokedexEntry();
+		//customize the entry based on mixing area
 		if(mMixerIngredients.size() >= 3)
 		{
 			entry.setThirdIngredient(mMixerIngredients.get(2).getName());
@@ -672,15 +717,18 @@ public class GameFragment extends Fragment {
 					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
 					mPokedex.get(i).setDiscovered(true);
 					mPokedexLab.updatePokedex(mPokedex.get(i));
+					//Don't forget to update the UI
 					updateUI();
 				}
 			}
+			//We found something, so return
 			return foundEntry.getIngredient();
 		}
 
 		//We didn't make anything with sensors... now try without
 		entry.setSensor("");
 
+		//query 2
 		foundEntry = mPokedexLab.getEntry(entry);
 		if(foundEntry != null)
 		{
@@ -706,13 +754,16 @@ public class GameFragment extends Fragment {
 		public void onSensorChanged(SensorEvent event) {
 			float ambientLight = event.values[0];
 			Log.i("DARK", String.valueOf(ambientLight));
+			//that's dark!
 			if(ambientLight < 10){
 				isDark = true;
+				//Did we find spooky scary?
 				checkMixer();
 			}
 			else
 			{
 				isDark = false;
+				checkMixer();
 			}
 		}
 
@@ -738,19 +789,20 @@ public class GameFragment extends Fragment {
 
 				double speed = Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 1000;
 
+				//shaking in progress, check combinations
 				if(speed > SHAKE_THRESHOLD) {
-					//Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
 					isShaking = true;
+					checkMixer();
 				}
 				else {
 					isShaking = false;
+					checkMixer();
 				}
 
 				last_x = x;
 				last_y = y;
 				last_z = z;
 			}
-			//Log.d(TAG, "onSensorChanged() " + event.toString());
 		}
 
 		@Override
