@@ -1,5 +1,10 @@
 package com.pokalchemy.pokalchemy;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -33,6 +38,9 @@ public class GameFragment extends Fragment {
 	private IngredientAdapter mAnimalAdapter;
 	private IngredientAdapter mElementAdapter;
 	private IngredientAdapter mOtherAdapter;
+
+	private SensorManager mSensorManager;
+	private boolean isDark = false;
 
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
@@ -195,6 +203,14 @@ public class GameFragment extends Fragment {
 				}
 			}
 		});
+
+		// Get sensor manager and register the listener to it.
+		mSensorManager = ((SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE));
+
+		Sensor light_sensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+		mSensorManager.registerListener(lightSensorEventListener,
+				light_sensor,
+				SensorManager.SENSOR_DELAY_UI);
 
 		mTrash = (ImageButton)v.findViewById(R.id.trash);
 		mTrash.setOnClickListener(new View.OnClickListener() {
@@ -489,4 +505,21 @@ public class GameFragment extends Fragment {
 
 		return null;
 	}
+
+	// Define the sensor event listener.
+	private SensorEventListener lightSensorEventListener = new SensorEventListener() {
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			float ambientLight = event.values[0];
+			if(ambientLight < 30){
+				isDark = true;
+			}
+		}
+
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			// ignore
+		}
+	};
+
 }
