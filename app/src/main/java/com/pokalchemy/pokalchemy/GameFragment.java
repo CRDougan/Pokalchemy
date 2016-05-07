@@ -241,12 +241,15 @@ public class GameFragment extends Fragment {
 
 		Log.i(CHECK, "UPDATING UI");
 		//setup mPokemon adapter
-		List<Ingredient> ingredients = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		for(PokedexEntry entry : mPokedex)
 		{
-			Log.i(CHECK, entry.getIngredient().getName() + " has been discovered: " + entry.isDiscovered());
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON && entry.isDiscovered()) {
-				ingredients.add(entry.getIngredient());
+				if(addIngredient(ingredients,entry))
+				{
+					Log.i(CHECK, entry.getIngredient().getName() + " has been discovered: " + entry.isDiscovered());
+					ingredients.add(entry.getIngredient());
+				}
 			}
 		}
 		mPokemonAdapter = new IngredientAdapter(ingredients);
@@ -257,7 +260,10 @@ public class GameFragment extends Fragment {
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ANIMAL && entry.isDiscovered()) {
-				ingredients.add(entry.getIngredient());
+				if(addIngredient(ingredients,entry))
+				{
+					ingredients.add(entry.getIngredient());
+				}
 			}
 		}
 		mAnimalAdapter = new IngredientAdapter(ingredients);
@@ -268,7 +274,10 @@ public class GameFragment extends Fragment {
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ELEMENT && entry.isDiscovered()) {
-				ingredients.add(entry.getIngredient());
+				if(addIngredient(ingredients,entry))
+				{
+					ingredients.add(entry.getIngredient());
+				}
 			}
 		}
 		mElementAdapter = new IngredientAdapter(ingredients);
@@ -280,12 +289,24 @@ public class GameFragment extends Fragment {
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.OTHER && entry.isDiscovered()) {
-				ingredients.add(entry.getIngredient());
+				if(addIngredient(ingredients,entry))
+				{
+					ingredients.add(entry.getIngredient());
+				}
 			}
 		}
 		mOtherAdapter = new IngredientAdapter(ingredients);
 		mOtherRecyclerView.setAdapter(mOtherAdapter);
 
+	}
+
+	private boolean addIngredient(ArrayList<Ingredient> list, PokedexEntry entry)
+	{
+		for (Ingredient i : list) {
+			if (i.getName().equals(entry.getIngredient().getName()))
+				return false;
+		}
+		return true;
 	}
 
 	private class IngredientHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
