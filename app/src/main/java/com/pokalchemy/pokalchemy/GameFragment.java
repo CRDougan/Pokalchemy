@@ -207,18 +207,22 @@ public class GameFragment extends Fragment {
 
 		mPokemonRecyclerView = (RecyclerView)v.findViewById(R.id.pokemon_recycler_view);
 		mPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
+		mPokemonRecyclerView.setBackgroundColor(getResources().getColor(R.color.pokemon));
 
 
 		mAnimalRecyclerView = (RecyclerView)v.findViewById(R.id.animal_recycler_view);
 		mAnimalRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
+		mAnimalRecyclerView.setBackgroundColor(getResources().getColor(R.color.animal));
 
 
 		mElementRecyclerView = (RecyclerView)v.findViewById(R.id.element_recycler_view);
 		mElementRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
+		mElementRecyclerView.setBackgroundColor(getResources().getColor(R.color.element));
 
 
 		mOtherRecyclerView = (RecyclerView)v.findViewById(R.id.other_recycler_view);
 		mOtherRecyclerView.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.HORIZONTAL, false));
+		mOtherRecyclerView.setBackgroundColor(getResources().getColor(R.color.other));
 
 		updateUI();
 
@@ -481,10 +485,6 @@ public class GameFragment extends Fragment {
 					mPokedex.get(i).setDiscovered(true);
 					Log.i(CHECK, mPokedex.get(i).getIngredient().getName() + " has been discovered: " + mPokedex.get(i).isDiscovered());
 					mPokedexLab.updatePokedex(mPokedex.get(i));
-
-					//Remove everything from the mixing area and replace it with the newly created entry
-					mMixerIngredients.clear();
-					mMixingArea.removeAllViews();
 				}
 			}
 			updateUI();
