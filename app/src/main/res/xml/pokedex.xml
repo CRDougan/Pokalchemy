@@ -1,8 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <record name="Electric" first="" second="" third="" sensor="" type="ELEMENT" image="ic_electric" discovered="1" />
-    <record name="Mouse" first="" second="" third="" sensor="" type="ANIMAL" image="ic_mouse" discovered="1" />
-    <record name="Pikachu" first="Electric" second="Mouse" third="" sensor="" type="POKEMON" image="ic_pikachu" discovered="0" />
+    <!-- Pokemon -->
+    <record name="Bulbasaur" first="Grass" second="Dinosaur" third="" sensor="" type="POKEMON" image="ic_bulbasaur" discovered="0" />
+    <record name="Bulbasaur" first="Dinosaur" second="Grass" third="" sensor="" type="POKEMON" image="ic_bulbasaur" discovered="0" />
 
+    <record name="Charmander" first="Fire" second="Dinosaur" third="" sensor="" type="POKEMON" image="ic_charmander" discovered="0" />
+    <record name="Charmander" first="Dinosaur" second="Fire" third="" sensor="" type="POKEMON" image="ic_charmander" discovered="0" />
+
+    <record name="Squirtle" first="Squirrel" second="Turtle" third="" sensor="" type="POKEMON" image="ic_squirtle" discovered="0" />
+
+    <record name="Ekans" first="Snake" second="" third="" sensor="Flip" type="POKEMON" image="ic_ekans" discovered="0" />
+
+    <record name="Arbok" first="Snake" second="Poison" third="" sensor="Flip" type="POKEMON" image="ic_arbok" discovered="0" />
+    <record name="Arbok" first="Poison" second="Snake" third="" sensor="Flip" type="POKEMON" image="ic_arbok" discovered="0" />
+
+    <record name="Pikachu" first="Electric" second="Mouse" third="" sensor="" type="POKEMON" image="ic_pikachu" discovered="0" />
+    <record name="Pikachu" first="Mouse" second="Electric" third="" sensor="" type="POKEMON" image="ic_pikachu" discovered="0" />
+
+    <record name="Mankey" first="Human" second="Dinosaur" third="" sensor="" type="POKEMON" image="ic_mankey" discovered="0" />
+    <record name="Mankey" first="Dinosaur" second="Human" third="" sensor="" type="POKEMON" image="ic_mankey" discovered="0" />
+
+    <record name="Primeape" first="Mankey" second="" third="" sensor="Sound" type="POKEMON" image="ic_primeape" discovered="0" />
+
+    <record name="Geodude" first="Arms" second="Rock" third="Arms" sensor="" type="POKEMON" image="ic_geodude" discovered="0" />
+
+    <record name="Graveler" first="Geodude" second="Geodude" third="" sensor="" type="POKEMON" image="ic_graveler" discovered="0" />
+
+    <record name="Golem" first="Trainer" second="Graveler" third="Trainer" sensor="" type="POKEMON" image="ic_golem" discovered="0" />
+
+    <record name="Ghastly" first="" second="" third="" sensor="Dark" type="POKEMON" image="ic_ghastly" discovered="0" />
+
+    <record name="Haunter" first="Arms" second="Ghastly" third="Arms" sensor="Dark" type="POKEMON" image="ic_haunter" discovered="0" />
+
+    <record name="Gengar" first="Trainer" second="Haunter" third="Trainer" sensor="Dark" type="POKEMON" image="ic_gengar" discovered="0" />
+
+    <record name="Onix" first="Rock" second="Rock" third="Rock" sensor="" type="POKEMON" image="ic_onix" discovered="0" />
+
+    <record name="Aerodactyl" first="Dinosaur" second="Bird" third="Rock" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+    <record name="Aerodactyl" first="Dinosaur" second="Rock" third="Bird" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+    <record name="Aerodactyl" first="Bird" second="Dinosaur" third="Rock" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+    <record name="Aerodactyl" first="Bird" second="Rock" third="Dinosaur" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+    <record name="Aerodactyl" first="Rock" second="Dinosaur" third="Bird" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+    <record name="Aerodactyl" first="Rock" second="Bird" third="Dinosaur" sensor="" type="POKEMON" image="ic_aerodactyl" discovered="0" />
+
+    <record name="Articuno" first="Bird" second="Ice" third="" sensor="" type="POKEMON" image="ic_articuno" discovered="0" />
+    <record name="Articuno" first="Ice" second="Bird" third="" sensor="" type="POKEMON" image="ic_articuno" discovered="0" />
+
+    <record name="Zapdos" first="Bird" second="Electric" third="" sensor="" type="POKEMON" image="ic_zapdos" discovered="0" />
+    <record name="Zapdos" first="Electric" second="Bird" third="" sensor="" type="POKEMON" image="ic_zapdos" discovered="0" />
+
+    <record name="Moltres" first="Bird" second="Fire" third="" sensor="" type="POKEMON" image="ic_moltres" discovered="0" />
+    <record name="Moltres" first="Fire" second="Bird" third="" sensor="" type="POKEMON" image="ic_moltres" discovered="0" />
+
+    <record name="Mewtwo" first="Mew" second="Mew" third="" sensor="" type="POKEMON" image="ic_mewtwo" discovered="0" />
+
+    <record name="Mew" first="" second="" third="" sensor="" type="POKEMON" image="ic_mew" discovered="1" />
+
+    <!-- Animals -->
+    <record name="Turtle" first="" second="" third="" sensor="" type="ANIMAL" image="ic_turtle" discovered="1" />
+    <record name="Squirrel" first="" second="" third="" sensor="" type="ANIMAL" image="ic_squirrel" discovered="1" />
+    <record name="Mouse" first="" second="" third="" sensor="" type="ANIMAL" image="ic_mouse" discovered="1" />
+    <record name="Human" first="" second="" third="" sensor="" type="ANIMAL" image="ic_human" discovered="1" />
+    <record name="Dinosaur" first="" second="" third="" sensor="" type="ANIMAL" image="ic_dinosaur" discovered="1" />
+    <record name="Bird" first="" second="" third="" sensor="" type="ANIMAL" image="ic_bird" discovered="1" />
+    <!--<record name="Dog" first="" second="" third="" sensor="" type="ANIMAL" image="ic_dog" discovered="1" />-->
+    <record name="Snake" first="" second="" third="" sensor="" type="ANIMAL" image="ic_snake" discovered="1" />
+    <!--<record name="Crab" first="" second="" third="" sensor="" type="ANIMAL" image="ic_crab" discovered="1" />-->
+
+    <!-- Elements -->
+    <record name="Rock" first="" second="" third="" sensor="" type="ELEMENT" image="ic_rock" discovered="1" />
+    <record name="Grass" first="" second="" third="" sensor="" type="ELEMENT" image="ic_grass" discovered="1" />
+    <record name="Fire" first="" second="" third="" sensor="" type="ELEMENT" image="ic_fire" discovered="1" />
+    <record name="Water" first="" second="" third="" sensor="" type="ELEMENT" image="ic_water" discovered="1" />
+    <record name="Electric" first="" second="" third="" sensor="" type="ELEMENT" image="ic_electric" discovered="1" />
+    <record name="Ice" first="" second="" third="" sensor="" type="ELEMENT" image="ic_ice" discovered="1" />
+    <record name="Poison" first="" second="" third="" sensor="" type="ELEMENT" image="ic_poison" discovered="1" />
+
+    <!-- Other -->
+    <record name="Hat" first="" second="" third="" sensor="" type="OTHER" image="ic_hat" discovered="1" />
+    <record name="Arms" first="" second="" third="" sensor="" type="OTHER" image="ic_arms" discovered="1" />
+    <!--<record name="Ball" first="" second="" third="" sensor="" type="OTHER" image="ic_ball" discovered="1" />-->
+    <record name="Trainer" first="Hat" second="Human" third="" sensor="" type="OTHER" image="ic_ash" discovered="0" />
+    <record name="Trainer" first="Human" second="Hat" third="" sensor="" type="OTHER" image="ic_ash" discovered="0" />
+    <!--<record name="Steroids" first="" second="" third="" sensor="" type="OTHER" image="ic_steroids" discovered="1" />-->
+    <!--<record name="Shrooms" first="" second="" third="" sensor="" type="OTHER" image="ic_shrooms" discovered="1" />-->
+    <!--<record name="Crown" first="" second="" third="" sensor="" type="OTHER" image="ic_crown" discovered="1" />-->
 
 </PreferenceScreen>
