@@ -21,7 +21,7 @@ public class PokedexCursorWrapper extends CursorWrapper{
      * <p>Gets a row of data from our table and returns it as an object</p>
      * @return An onject representation of the data
      */
-        public PokedexEntry getPokedex(){
+        public PokedexEntry getPokedexEntry(){
             String name = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.NAME));
             String first = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.FIRST_INGREDIENT));
             String second = getString(getColumnIndex(PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT));

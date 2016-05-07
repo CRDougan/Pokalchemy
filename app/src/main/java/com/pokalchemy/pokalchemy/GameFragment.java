@@ -22,6 +22,7 @@ import java.util.List;
 public class GameFragment extends Fragment {
 
 	private static final String LOG = "LOGGING";
+	private static final String CHECK = "mixer area";
 
 	private RecyclerView mPokemonRecyclerView;
 	private RecyclerView mAnimalRecyclerView;
@@ -78,18 +79,24 @@ public class GameFragment extends Fragment {
 					mPokemon.setBackground(getResources().getDrawable(R.color.transparent));
 					mPokemonRecyclerView.setVisibility(View.GONE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight + 1;
-					mMixer.setLayoutParams(mixerParams);
+					if(mPokemonAdapter != null && mPokemonAdapter.getItemCount() > 0) {
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight + 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				} else {
 					p_on = true;
 					mPokemon.setTextColor(getResources().getColor(R.color.colorAccent));
 					mPokemon.setBackground(getResources().getDrawable(R.color.pokemon));
-					mPokemonRecyclerView.setVisibility(View.VISIBLE);
+					if(mPokemonAdapter != null && mPokemonAdapter.getItemCount() > 0) {
+						mPokemonRecyclerView.setVisibility(View.VISIBLE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight - 1;
-					mMixer.setLayoutParams(mixerParams);
+
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight - 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
+
 				}
 			}
 		});
@@ -104,18 +111,24 @@ public class GameFragment extends Fragment {
 					mAnimals.setBackground(getResources().getDrawable(R.color.transparent));
 					mAnimalRecyclerView.setVisibility(View.GONE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight + 1;
-					mMixer.setLayoutParams(mixerParams);
+
+					if(mAnimalAdapter != null && mAnimalAdapter.getItemCount() > 0) {
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight + 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				} else {
 					a_on = true;
 					mAnimals.setTextColor(getResources().getColor(R.color.colorAccent));
 					mAnimals.setBackground(getResources().getDrawable(R.color.animal));
-					mAnimalRecyclerView.setVisibility(View.VISIBLE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight - 1;
-					mMixer.setLayoutParams(mixerParams);
+					if(mAnimalAdapter != null && mAnimalAdapter.getItemCount() > 0) {
+						mAnimalRecyclerView.setVisibility(View.VISIBLE);
+
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight - 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				}
 			}
 		});
@@ -130,18 +143,23 @@ public class GameFragment extends Fragment {
 					mElements.setBackground(getResources().getDrawable(R.color.transparent));
 					mElementRecyclerView.setVisibility(View.GONE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight + 1;
-					mMixer.setLayoutParams(mixerParams);
+					if(mElementAdapter != null && mElementAdapter.getItemCount() > 0) {
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight + 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				} else {
 					e_on = true;
 					mElements.setTextColor(getResources().getColor(R.color.colorAccent));
 					mElements.setBackground(getResources().getDrawable(R.color.element));
-					mElementRecyclerView.setVisibility(View.VISIBLE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight - 1;
-					mMixer.setLayoutParams(mixerParams);
+					if(mElementAdapter != null && mElementAdapter.getItemCount() > 0) {
+						mElementRecyclerView.setVisibility(View.VISIBLE);
+
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight - 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				}
 			}
 		});
@@ -156,18 +174,24 @@ public class GameFragment extends Fragment {
 					mOther.setBackground(getResources().getDrawable(R.color.transparent));
 					mOtherRecyclerView.setVisibility(View.GONE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight + 1;
-					mMixer.setLayoutParams(mixerParams);
+
+					if(mOtherAdapter != null && mOtherAdapter.getItemCount() > 0) {
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight + 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				} else {
 					o_on = true;
 					mOther.setTextColor(getResources().getColor(R.color.colorAccent));
 					mOther.setBackground(getResources().getDrawable(R.color.other));
-					mOtherRecyclerView.setVisibility(View.VISIBLE);
 
-					LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams)mMixer.getLayoutParams();
-					mixerParams.weight = mixerParams.weight - 1;
-					mMixer.setLayoutParams(mixerParams);
+					if(mOtherAdapter != null && mOtherAdapter.getItemCount() > 0) {
+						mOtherRecyclerView.setVisibility(View.VISIBLE);
+
+						LinearLayout.LayoutParams mixerParams = (LinearLayout.LayoutParams) mMixer.getLayoutParams();
+						mixerParams.weight = mixerParams.weight - 1;
+						mMixer.setLayoutParams(mixerParams);
+					}
 				}
 			}
 		});
@@ -176,6 +200,7 @@ public class GameFragment extends Fragment {
 		mTrash.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mMixerIngredients.clear();
 				mMixingArea.removeAllViews();
 			}
 		});
@@ -214,75 +239,52 @@ public class GameFragment extends Fragment {
 	 */
 	public void updateUI() {
 
+		Log.i(CHECK, "UPDATING UI");
 		//setup mPokemon adapter
-		if(mPokemonAdapter == null) {
-			List<Ingredient> ingredients = new ArrayList<Ingredient>();
-//			for(PokedexEntry entry : )
-//			{
-//				Ingredient ingredient = new Ingredient();
-//				ingredient.setImageID("ic_launcher");
-//				ingredient.setName("Android");
-//				ingredient.setType(Ingredient.INGREDIENT_TYPE.POKEMON);
-//				ingredients.add(ingredient);
-//			}
-			mPokemonAdapter = new IngredientAdapter(ingredients);
-			mPokemonRecyclerView.setAdapter(mPokemonAdapter);
+		List<Ingredient> ingredients = new ArrayList<Ingredient>();
+		for(PokedexEntry entry : mPokedex)
+		{
+			Log.i(CHECK, entry.getIngredient().getName() + " has been discovered: " + entry.isDiscovered());
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON && entry.isDiscovered()) {
+				ingredients.add(entry.getIngredient());
+			}
 		}
-		else {
-			mPokemonAdapter.notifyDataSetChanged();
-		}
+		mPokemonAdapter = new IngredientAdapter(ingredients);
+		mPokemonRecyclerView.setAdapter(mPokemonAdapter);
 
 		//setup mAnimal adapter
-		if(mAnimalAdapter == null) {
-			List<Ingredient> ingredients = new ArrayList<Ingredient>();
-			for(int i = 0; i < 20; i++)
-			{
-				Ingredient ingredient = new Ingredient();
-				ingredient.setImageID("ic_human");
-				ingredient.setName("Human");
-				ingredient.setType(Ingredient.INGREDIENT_TYPE.ANIMAL);
-				ingredients.add(ingredient);
+		ingredients = new ArrayList<Ingredient>();
+		for(PokedexEntry entry : mPokedex)
+		{
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ANIMAL && entry.isDiscovered()) {
+				ingredients.add(entry.getIngredient());
 			}
-			mAnimalAdapter = new IngredientAdapter(ingredients);
-			mAnimalRecyclerView.setAdapter(mAnimalAdapter);
 		}
-		else {
-			mAnimalAdapter.notifyDataSetChanged();
-		}
+		mAnimalAdapter = new IngredientAdapter(ingredients);
+		mAnimalRecyclerView.setAdapter(mAnimalAdapter);
 
 		//setup mElement adapter
-		if(mElementAdapter == null) {
-			List<Ingredient> ingredients = new ArrayList<Ingredient>();
-			for(int i = 0; i < 100; i++)
-			{
-				Ingredient ingredient = new Ingredient();
-				ingredient.setImageID("ic_water");
-				ingredient.setName("Water");
-				ingredient.setType(Ingredient.INGREDIENT_TYPE.ELEMENT);
-				ingredients.add(ingredient);
+		ingredients = new ArrayList<Ingredient>();
+		for(PokedexEntry entry : mPokedex)
+		{
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ELEMENT && entry.isDiscovered()) {
+				ingredients.add(entry.getIngredient());
 			}
-			mElementAdapter = new IngredientAdapter(ingredients);
-			mElementRecyclerView.setAdapter(mElementAdapter);
 		}
-		else {
-			mElementAdapter.notifyDataSetChanged();
-		}
+		mElementAdapter = new IngredientAdapter(ingredients);
+		mElementRecyclerView.setAdapter(mElementAdapter);
+
 
 		//setup "mOther" adapter
-		if(mOtherAdapter == null) {
-			List<Ingredient> ingredients = new ArrayList<Ingredient>();
-//			for(int i = 0; i < 3; i++)
-//			{
-//				Ingredient ingredient = new Ingredient();
-//				ingredient.setImageID(R.mipmap.ic_launcher);
-//				ingredients.add(ingredient);
-//			}
-			mOtherAdapter = new IngredientAdapter(ingredients);
-			mOtherRecyclerView.setAdapter(mOtherAdapter);
+		ingredients = new ArrayList<Ingredient>();
+		for(PokedexEntry entry : mPokedex)
+		{
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.OTHER && entry.isDiscovered()) {
+				ingredients.add(entry.getIngredient());
+			}
 		}
-		else {
-			mOtherAdapter.notifyDataSetChanged();
-		}
+		mOtherAdapter = new IngredientAdapter(ingredients);
+		mOtherRecyclerView.setAdapter(mOtherAdapter);
 
 	}
 
@@ -312,7 +314,6 @@ public class GameFragment extends Fragment {
 						Toast.makeText(v.getContext(), "There are too many ingredients already. Cannot add more.", Toast.LENGTH_LONG).show();
 						return;
 					}
-					Toast.makeText(v.getContext(), String.valueOf(mButton.getBackground()), Toast.LENGTH_LONG).show();
 
 					mMixerIngredients.add(mHolderIngredient);
 
@@ -334,7 +335,7 @@ public class GameFragment extends Fragment {
 					mMixingArea.addView(ingredientButton, params);
 
 					if (checkMixer() != null) {
-						Toast.makeText(v.getContext(), "You made a new Pokemon!", Toast.LENGTH_SHORT).show();
+						//sdlfsh
 					}
 				}
 			});
@@ -423,22 +424,48 @@ public class GameFragment extends Fragment {
 	 * @return the new combined ingredient or null if no combination
 	 */
 	private Ingredient checkMixer() {
-		int waterCount = 0, androidCount = 0;
-		for (int i = 0; i < mMixingArea.getChildCount(); i++) {
-			Log.i("pokemon", mMixerIngredients.get(i).getName());
-			if(mMixerIngredients.get(i).getName() == "Android")
-			{
-				androidCount++;
-			}
-			else if(mMixerIngredients.get(i).getName() == "Water")
-			{
-				waterCount++;
-			}
+		//create an entry to use to query the db
+		Log.i(CHECK, "Making a new ingredient");
+		PokedexEntry entry = new PokedexEntry();
+		if(mMixerIngredients.size() >= 3)
+		{
+			Log.i(CHECK, "Adding " + mMixerIngredients.get(2).getName() + " as the third ingredient");
+			entry.setThirdIngredient(mMixerIngredients.get(2).getName());
 		}
-		if (waterCount == 1 && androidCount == 1) {
-			Toast.makeText(getContext(), "You made a human!", Toast.LENGTH_LONG).show();
-			return new Ingredient();
+		if(mMixerIngredients.size() >= 2)
+		{
+			Log.i(CHECK, "Adding " + mMixerIngredients.get(1).getName() + " as the second ingredient");
+			entry.setSecondIngerdient(mMixerIngredients.get(1).getName());
 		}
+		if(mMixerIngredients.size() >= 1)
+		{
+			Log.i(CHECK, "Adding " + mMixerIngredients.get(0).getName() + " as the first ingredient");
+			entry.setFirstIngredient(mMixerIngredients.get(0).getName());
+		}
+
+		//TODO: set sensor value here
+		entry.setSensor("");
+		//Log.i(CHECK, "Adding " + entry.getSensor() + "as the sensor");
+
+		//query the db
+		PokedexEntry foundEntry = mPokedexLab.getEntry(entry);
+		if(foundEntry != null)
+		{
+			//We found a match ~ go through pokedex and discover it!
+			for(int i = 0; i < mPokedex.size(); i++)
+			{
+				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()))
+				{
+					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
+					mPokedex.get(i).setDiscovered(true);
+					Log.i(CHECK, mPokedex.get(i).getIngredient().getName() + " has been discovered: " + mPokedex.get(i).isDiscovered());
+					mPokedexLab.updatePokedex(mPokedex.get(i));
+				}
+			}
+			updateUI();
+			return foundEntry.getIngredient();
+		}
+
 		return null;
 	}
 }

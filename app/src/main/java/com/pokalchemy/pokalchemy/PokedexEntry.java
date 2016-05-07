@@ -12,11 +12,11 @@ public class PokedexEntry {
     private boolean mDiscovered;
 
     public PokedexEntry() {
-        mIngredient = null;
-        mFirstIngredient = null;
-        mSecondIngerdient = null;
-        mThirdIngredient = null;
-        mSensor = null;
+        mIngredient = new Ingredient();
+        mFirstIngredient = "";
+        mSecondIngerdient = "";
+        mThirdIngredient = "";
+        mSensor = "";
         mDiscovered = false;
     }
 

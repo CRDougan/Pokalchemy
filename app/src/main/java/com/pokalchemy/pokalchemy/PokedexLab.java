@@ -88,7 +88,7 @@ public class PokedexLab {
             while(!cursor.isAfterLast())
             {
                 Log.i(TAG, "Looking through DB");
-                pokedex.add(cursor.getPokedex());
+                pokedex.add(cursor.getPokedexEntry());
                 cursor.moveToNext();
             }
         } finally {
@@ -101,12 +101,15 @@ public class PokedexLab {
     /**
      * get a pokedex form our list of pokedexs
      * <p>get a pokedex form our list of pokedexs</p>
-     * @param latLng the location of the pokedex
+     * @param entry the pokedex entry
      * @return the pokedex
      */
-    /*public PokedexEntry getPlace(LatLng latLng){
-        PokedexCursorWrapper cursor = queryPokedex(PokedexDBSchema.PokedexTable.Cols.LAT + " = ? AND " + PokedexDBSchema.PokedexTable.Cols.LON + " = ?",
-                    new String[]{Double.toString(latLng.latitude), Double.toString((double) latLng.longitude)});
+     public PokedexEntry getEntry(PokedexEntry entry){
+        PokedexCursorWrapper cursor = queryPokedex(PokedexDBSchema.PokedexTable.Cols.FIRST_INGREDIENT + " = ? AND " +
+                PokedexDBSchema.PokedexTable.Cols.SECOND_INGREDIENT + " = ? AND " +
+                PokedexDBSchema.PokedexTable.Cols.THIRD_INGREDIENT + " = ? AND " +
+                PokedexDBSchema.PokedexTable.Cols.SENSOR + " = ?",
+                new String[]{entry.getFirstIngredient(), entry.getSecondIngerdient(), entry.getThirdIngredient(), entry.getSensor()});
 
         try {
             if( cursor.getCount() == 0) {
@@ -114,13 +117,13 @@ public class PokedexLab {
             }
 
             cursor.moveToFirst();
-            return cursor.getPlace();
+            return cursor.getPokedexEntry();
         } finally {
             cursor.close();
         }
 
     }
-*/
+
     /**
      * Updates the date of a pokedex
      * <p>not used yet, but would update a marker at the same location</p>
@@ -129,10 +132,10 @@ public class PokedexLab {
     public void updatePokedex(PokedexEntry pokedex)
     {
         //TODO: update this function to change the discovered value
-        //String uuidString = pokedex.getDatetime().toString();
-        //ContentValues values = getContentValues(pokedex);
+        String entry = pokedex.getIngredient().getName();
+        ContentValues values = getContentValues(pokedex);
 
-        //mDatabase.update(PokedexDBSchema.PokedexTable.NAME, values, PokedexDBSchema.PokedexTable.Cols.DATETIME + " = ?", new String[]{uuidString});
+        mDatabase.update(PokedexDBSchema.PokedexTable.NAME, values, PokedexDBSchema.PokedexTable.Cols.NAME + " = ?", new String[]{entry});
     }
 
     /**
@@ -152,19 +155,19 @@ public class PokedexLab {
 
         if(pokedex.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON)
         {
-            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, 0);
+            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, "POKEMON");
         }
         else if(pokedex.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ANIMAL)
         {
-            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, 1);
+            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, "ANIMAL");
         }
         else if(pokedex.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ELEMENT)
         {
-            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, 2);
+            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, "ELEMENT");
         }
         else
         {
-            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, 3);
+            values.put(PokedexDBSchema.PokedexTable.Cols.TYPE, "OTHER");
         }
 
 
