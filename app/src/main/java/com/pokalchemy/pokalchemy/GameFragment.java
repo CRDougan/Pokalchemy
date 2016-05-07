@@ -1,6 +1,7 @@
 package com.pokalchemy.pokalchemy;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,6 +33,7 @@ public class GameFragment extends Fragment {
 
 	private static final String LOG = "LOGGING";
 	private static final String CHECK = "mixer area";
+	private static final int SHAKE_THRESHOLD = 400;
 
 	private RecyclerView mPokemonRecyclerView;
 	private RecyclerView mAnimalRecyclerView;
@@ -44,6 +47,10 @@ public class GameFragment extends Fragment {
 
 	private SensorManager mSensorManager;
 	private boolean isDark = false;
+	private boolean isShaking = false;
+	private long lastUpdate;
+	private double x, y , z, last_x, last_y, last_z;
+	private boolean isFlipped = false;
 
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
@@ -56,7 +63,7 @@ public class GameFragment extends Fragment {
 
 	private PokedexLab mPokedexLab;
 	private ArrayList<PokedexEntry> mPokedex;
-
+	private OrientationEventListener mOrientationEventListener;
 
 	/**
 	 * Create new instance
@@ -72,9 +79,7 @@ public class GameFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_game, container, false);
-
 		setHasOptionsMenu(true);
-
 		mPokedexLab = PokedexLab.get(getContext());
 		mPokedex = (ArrayList<PokedexEntry>) mPokedexLab.getPokedex();
 
@@ -82,6 +87,14 @@ public class GameFragment extends Fragment {
 
 		mMixer = (FrameLayout)v.findViewById(R.id.ingredient_mixer_view);
 		mMixingArea = (LinearLayout)v.findViewById(R.id.mixing_area);
+
+		lastUpdate = 0;
+		x = 0;
+		y = 0;
+		z = 0;
+		last_x = 0;
+		last_y = 0;
+		last_z = 0;
 
 		mPokemon = (Button)v.findViewById(R.id.pokemon_button);
 		mPokemon.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +230,25 @@ public class GameFragment extends Fragment {
 		mSensorManager.registerListener(lightSensorEventListener,
 				light_sensor,
 				SensorManager.SENSOR_DELAY_UI);
+		Sensor accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mSensorManager.registerListener(accelSensorEventListener,
+				accelerometer,
+				SensorManager.SENSOR_DELAY_UI);
+		mOrientationEventListener = new OrientationEventListener(getContext(), mSensorManager.SENSOR_DELAY_UI) {
+			@Override
+			public void onOrientationChanged(int orientation) {
+				if (170 < orientation && 190 > orientation){
+					isFlipped = true;
+					Log.i("Orientation", "upside down");
+				}
+				else {
+					isFlipped = false;
+					Log.i("Orientation", "right side up");
+				}
+			}
+		};
+		mOrientationEventListener.enable();
+
 
 		mTrash = (ImageButton)v.findViewById(R.id.trash);
 		mTrash.setOnClickListener(new View.OnClickListener() {
@@ -619,6 +651,43 @@ public class GameFragment extends Fragment {
 			{
 				isDark = false;
 			}
+		}
+
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			// ignore
+		}
+	};
+
+	// Define the sensor event listener.
+	private SensorEventListener accelSensorEventListener = new SensorEventListener() {
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			PointF accel = new PointF(event.values[0], event.values[1]);
+			long curr_time = System.currentTimeMillis();
+			if((curr_time - lastUpdate) > 100) {
+				long diffTime = (curr_time - lastUpdate);
+				lastUpdate = curr_time;
+
+				x = event.values[SensorManager.DATA_X];
+				y = event.values[SensorManager.DATA_Y];
+				z = event.values[SensorManager.DATA_Z];
+
+				double speed = Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 1000;
+
+				if(speed > SHAKE_THRESHOLD) {
+					//Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
+					isShaking = true;
+				}
+				else {
+					isShaking = false;
+				}
+
+				last_x = x;
+				last_y = y;
+				last_z = z;
+			}
+			//Log.d(TAG, "onSensorChanged() " + event.toString());
 		}
 
 		@Override
