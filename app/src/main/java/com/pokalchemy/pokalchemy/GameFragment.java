@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class GameFragment extends Fragment {
 	private boolean isShaking = false;
 	private long lastUpdate;
 	private double x, y , z, last_x, last_y, last_z;
+	private boolean isFlipped = false;
 
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
@@ -57,7 +59,7 @@ public class GameFragment extends Fragment {
 
 	private PokedexLab mPokedexLab;
 	private ArrayList<PokedexEntry> mPokedex;
-
+	private OrientationEventListener mOrientationEventListener;
 
 	/**
 	 * Create new instance
@@ -227,6 +229,20 @@ public class GameFragment extends Fragment {
 		mSensorManager.registerListener(accelSensorEventListener,
 				accelerometer,
 				SensorManager.SENSOR_DELAY_UI);
+		mOrientationEventListener = new OrientationEventListener(getContext(), mSensorManager.SENSOR_DELAY_UI) {
+			@Override
+			public void onOrientationChanged(int orientation) {
+				if (170 < orientation && 190 > orientation){
+					isFlipped = true;
+					Log.i("Orientation", "upside down");
+				}
+				else {
+					isFlipped = false;
+					Log.i("Orientation", "right side up");
+				}
+			}
+		};
+		mOrientationEventListener.enable();
 
 
 		mTrash = (ImageButton)v.findViewById(R.id.trash);
@@ -601,7 +617,7 @@ public class GameFragment extends Fragment {
 				double speed = Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 1000;
 
 				if(speed > SHAKE_THRESHOLD) {
-					Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
+					//Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
 					isShaking = true;
 				}
 				else {
