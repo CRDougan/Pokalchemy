@@ -2,13 +2,13 @@ package com.pokalchemy.pokalchemy;
 
 /**
  * Created by Connor on 5/3/2016.
- * The Schema for our Places Table
- * <p>The Schema for our Places Table</p>
+ * The Schema for our Pokedex Table
+ * <p>The Schema for our Pokedex Table</p>
  */
 public class PokedexDBSchema {
     /**
-     * The actual Places table
-     * <p>the Place table</p>
+     * The actual Pokedex table
+     * <p>the Pokedex table</p>
      */
     public static final class PokedexTable {
         public static final String NAME = "pokedex";
