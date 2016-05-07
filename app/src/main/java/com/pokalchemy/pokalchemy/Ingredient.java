@@ -2,13 +2,16 @@ package com.pokalchemy.pokalchemy;
 
 /**
  * Created by Connor on 4/10/2016.
+ * <p>Ingredient class used in creating new Pokemon (also ingredients) with imageID, name, and type</p>
  */
 public class Ingredient {
     private String mImageID;
     private String mName;
     private INGREDIENT_TYPE mType;
 
-
+    /**
+     * Constructs a default Ingredient
+     */
     public Ingredient()
     {
         mImageID = "";
@@ -16,6 +19,10 @@ public class Ingredient {
         mType = INGREDIENT_TYPE.OTHER;
     }
 
+    /**
+     * Constructs a copy of another Ingredient
+     * @param other copied ingredient
+     */
     public Ingredient(Ingredient other)
     {
         this.mImageID = other.getImageID();
@@ -48,8 +55,6 @@ public class Ingredient {
     public void setType(INGREDIENT_TYPE mType) {
         this.mType = mType;
     }
-
-
 
     public enum INGREDIENT_TYPE {POKEMON, ANIMAL, ELEMENT, OTHER};
 }

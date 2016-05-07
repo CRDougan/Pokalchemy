@@ -25,6 +25,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the main fragment for the game
+ * <p>This is the main fragment for the game</p>
+ */
 public class GameFragment extends Fragment {
 
 	private static final String LOG = "LOGGING";
@@ -69,6 +73,13 @@ public class GameFragment extends Fragment {
 		return fragment;
 	}
 
+	/**
+	 *
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return
+	 */
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -263,6 +274,9 @@ public class GameFragment extends Fragment {
 	}
 
 
+	/**
+	 * Resume the Fragment
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -272,7 +286,7 @@ public class GameFragment extends Fragment {
 
 	/**
 	 * Update the UI
-	 * <p>update UI when crimes are edited to reflect changes in real time</p>
+	 * <p>Update the UI when new Pokemon are discovered to reflect changes in real time</p>
 	 */
 	public void updateUI() {
 
@@ -335,6 +349,12 @@ public class GameFragment extends Fragment {
 
 	}
 
+	/**
+	 * Checks if an ingredient is already in a list of ingredients
+	 * @param list list of ingredients
+	 * @param entry ingredient to check for in list
+	 * @return true if the list successfully added the entry, false if the list already has entry
+	 */
 	private boolean addIngredient(ArrayList<Ingredient> list, PokedexEntry entry)
 	{
 		for (Ingredient i : list) {
@@ -344,6 +364,9 @@ public class GameFragment extends Fragment {
 		return true;
 	}
 
+	/**
+	 * RecyclerView Used to Hold Ingredients
+	 */
 	private class IngredientHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 		private Ingredient mHolderIngredient;
@@ -399,9 +422,9 @@ public class GameFragment extends Fragment {
 		}
 
 		/**
-		 * Binds a crime
-		 * <p>Binds crime details to view</p>
-		 * @param i the crime
+		 * Binds an ingredient
+		 * <p>Binds ingredient details to view</p>
+		 * @param i the ingredient
 		 */
 		public void bindIngredient(Ingredient i){
 			//TODO: Set the image here
@@ -427,7 +450,8 @@ public class GameFragment extends Fragment {
 
 		/**
 		 * On click listener
-		 * <p>Let parent know a crime was seleced</p>
+		 * <p>Let parent know an ingredient was selected</p>
+		 * <p>Unused</p>
 		 * @param v the view
 		 */
 		@Override
@@ -445,8 +469,8 @@ public class GameFragment extends Fragment {
 		private List<Ingredient> mIngredients;
 
 		/**
-		 * Get number of crimes
-		 * <p>Get number of crimes</p>
+		 * Get number of ingredients
+		 * <p>Get number of ingredients</p>
 		 * @return
 		 */
 		@Override
@@ -471,7 +495,7 @@ public class GameFragment extends Fragment {
 
 		/**
 		 * Binds Ingredient to holder
-		 * <p>Binds a crime to a holder</p>
+		 * <p>Binds an ingredient to a holder</p>
 		 * @param holder the holder
 		 * @param position the position of the holder
 		 */
@@ -483,7 +507,7 @@ public class GameFragment extends Fragment {
 
 		/**
 		 * Constructor
-		 * <p>Gives the adapter the list of crimes</p>
+		 * <p>Gives the adapter the list of ingredients</p>
 		 * @param ingredients
 		 */
 		public IngredientAdapter(List<Ingredient> ingredients) {
@@ -511,7 +535,7 @@ public class GameFragment extends Fragment {
 			entry.setFirstIngredient(mMixerIngredients.get(0).getName());
 		}
 
-		//TODO: set sensor value here
+		//set sensor value here
 		entry.setSensor("");
 
 
