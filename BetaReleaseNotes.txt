@@ -1,7 +1,7 @@
 This document describes the usage instructions, known bugs, and any other things worth mentioning about the app in its Beta Release Version.
 
 USAGE:
-The goal of our app is to combine ingrediants from different categories chosen at the top into pokemon. To do this tap on one or more selection groups then tap on the ingredients you want to add to the mixing area. The ingredients will be automatically mixed once in the mixing area if they create a valid combination. To remove individual ingredients from the mixing area, tap on them or tap the trash can at the bottom to remove all ingredients in the mixing area. The player "wins" when they have discovered all the Pokemon. If we had more time to add combinations, this game would have the player discover all 151 original Pokemon. Currently the end goal is to discover the 21 that are available.
+The goal of our app is to combine ingrediants from different categories chosen at the top into pokemon. To do this tap on one or more selection groups then tap on the ingredients you want to add to the mixing area. The ingredients will be automatically mixed once in the mixing area if they create a valid combination. To remove individual ingredients from the mixing area, tap on them or tap the trash can at the bottom to remove all ingredients in the mixing area. The player "wins" when they have discovered all the Pokemon. If we had more time to add combinations, this game would have the player discover all 151 original Pokemon. Currently the end goal is to discover the 26 that are available.
 
 BUGS:
 
