@@ -5,6 +5,8 @@
     tools:context=".GameActivity">
 
     <item android:id="@+id/action_pokedex"
-        android:title="@string/pokedex" />
+        android:title="@string/pokedex"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
 
 </menu>

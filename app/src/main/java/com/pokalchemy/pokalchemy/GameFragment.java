@@ -239,11 +239,9 @@ public class GameFragment extends Fragment {
 			public void onOrientationChanged(int orientation) {
 				if (170 < orientation && 190 > orientation){
 					isFlipped = true;
-					Log.i("Orientation", "upside down");
 				}
 				else {
 					isFlipped = false;
-					Log.i("Orientation", "right side up");
 				}
 			}
 		};
@@ -335,11 +333,42 @@ public class GameFragment extends Fragment {
 
 		//setup mPokemon adapter
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+		int totalPokemon = 0;
+		int seenPokemon = 0;
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON)
 			{
+				if (addIngredient(ingredients, entry))
+				{
+					totalPokemon++;
+					if(entry.isDiscovered())
+					{
+						seenPokemon++;
+						entry.getIngredient().setImageID(entry.getIngredient().getOriginalImageID());
+						ingredients.add(entry.getIngredient());
 
+					}
+					else if (pokedexOn) {
+						entry.getIngredient().setImageID("ic_undiscovered");
+						ingredients.add(entry.getIngredient());
+					}
+				}
+			}
+		}
+		if(seenPokemon == totalPokemon)
+		{
+			Toast.makeText(getContext(), "You caught 'em all!", Toast.LENGTH_LONG).show();
+		}
+		mPokemonAdapter = new IngredientAdapter(ingredients);
+		mPokemonRecyclerView.setAdapter(mPokemonAdapter);
+
+		//setup mAnimal adapter
+		ingredients = new ArrayList<Ingredient>();
+		for(PokedexEntry entry : mPokedex)
+		{
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ANIMAL) {
 				if (addIngredient(ingredients, entry))
 				{
 					if(entry.isDiscovered())
@@ -355,20 +384,6 @@ public class GameFragment extends Fragment {
 				}
 			}
 		}
-		mPokemonAdapter = new IngredientAdapter(ingredients);
-		mPokemonRecyclerView.setAdapter(mPokemonAdapter);
-
-		//setup mAnimal adapter
-		ingredients = new ArrayList<Ingredient>();
-		for(PokedexEntry entry : mPokedex)
-		{
-			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ANIMAL && entry.isDiscovered()) {
-				if(addIngredient(ingredients,entry))
-				{
-					ingredients.add(entry.getIngredient());
-				}
-			}
-		}
 		mAnimalAdapter = new IngredientAdapter(ingredients);
 		mAnimalRecyclerView.setAdapter(mAnimalAdapter);
 
@@ -377,9 +392,18 @@ public class GameFragment extends Fragment {
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.ELEMENT && entry.isDiscovered()) {
-				if(addIngredient(ingredients,entry))
+				if (addIngredient(ingredients, entry))
 				{
-					ingredients.add(entry.getIngredient());
+					if(entry.isDiscovered())
+					{
+						entry.getIngredient().setImageID(entry.getIngredient().getOriginalImageID());
+						ingredients.add(entry.getIngredient());
+
+					}
+					else if (pokedexOn) {
+						entry.getIngredient().setImageID("ic_undiscovered");
+						ingredients.add(entry.getIngredient());
+					}
 				}
 			}
 		}
@@ -392,9 +416,18 @@ public class GameFragment extends Fragment {
 		for(PokedexEntry entry : mPokedex)
 		{
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.OTHER && entry.isDiscovered()) {
-				if(addIngredient(ingredients,entry))
+				if (addIngredient(ingredients, entry))
 				{
-					ingredients.add(entry.getIngredient());
+					if(entry.isDiscovered())
+					{
+						entry.getIngredient().setImageID(entry.getIngredient().getOriginalImageID());
+						ingredients.add(entry.getIngredient());
+
+					}
+					else if (pokedexOn) {
+						entry.getIngredient().setImageID("ic_undiscovered");
+						ingredients.add(entry.getIngredient());
+					}
 				}
 			}
 		}
@@ -590,6 +623,18 @@ public class GameFragment extends Fragment {
 
 		//TODO: set sensor value here
 		entry.setSensor("");
+		if(isDark)
+		{
+			entry.setSensor("Dark");
+		}
+		if(isFlipped)
+		{
+			entry.setSensor("Flip");
+		}
+		if(isShaking)
+		{
+			entry.setSensor("Shake");
+		}
 
 
 		//query the db
@@ -609,15 +654,8 @@ public class GameFragment extends Fragment {
 			return foundEntry.getIngredient();
 		}
 
-		//We didn't make anything without sensors... now try with
-		if(isDark)
-		{
-			entry.setSensor("Dark");
-		}
-		//if(isFlipped)
-		//{
-		//	entry.set
-		//}
+		//We didn't make anything with sensors... now try without
+		entry.setSensor("");
 
 		foundEntry = mPokedexLab.getEntry(entry);
 		if(foundEntry != null)
@@ -643,7 +681,8 @@ public class GameFragment extends Fragment {
 		@Override
 		public void onSensorChanged(SensorEvent event) {
 			float ambientLight = event.values[0];
-			if(ambientLight < 30){
+			Log.i("DARK", String.valueOf(ambientLight));
+			if(ambientLight < 10){
 				isDark = true;
 				checkMixer();
 			}
