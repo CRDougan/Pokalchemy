@@ -259,7 +259,6 @@ public class GameFragment extends Fragment {
 	 */
 	public void updateUI() {
 
-		Log.i(CHECK, "UPDATING UI");
 		//setup mPokemon adapter
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		for(PokedexEntry entry : mPokedex)
@@ -267,7 +266,6 @@ public class GameFragment extends Fragment {
 			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON && entry.isDiscovered()) {
 				if(addIngredient(ingredients,entry))
 				{
-					Log.i(CHECK, entry.getIngredient().getName() + " has been discovered: " + entry.isDiscovered());
 					ingredients.add(entry.getIngredient());
 				}
 			}
@@ -482,27 +480,23 @@ public class GameFragment extends Fragment {
 	 */
 	private Ingredient checkMixer() {
 		//create an entry to use to query the db
-		Log.i(CHECK, "Making a new ingredient");
 		PokedexEntry entry = new PokedexEntry();
 		if(mMixerIngredients.size() >= 3)
 		{
-			Log.i(CHECK, "Adding " + mMixerIngredients.get(2).getName() + " as the third ingredient");
 			entry.setThirdIngredient(mMixerIngredients.get(2).getName());
 		}
 		if(mMixerIngredients.size() >= 2)
 		{
-			Log.i(CHECK, "Adding " + mMixerIngredients.get(1).getName() + " as the second ingredient");
 			entry.setSecondIngerdient(mMixerIngredients.get(1).getName());
 		}
 		if(mMixerIngredients.size() >= 1)
 		{
-			Log.i(CHECK, "Adding " + mMixerIngredients.get(0).getName() + " as the first ingredient");
 			entry.setFirstIngredient(mMixerIngredients.get(0).getName());
 		}
 
 		//TODO: set sensor value here
 		entry.setSensor("");
-		//Log.i(CHECK, "Adding " + entry.getSensor() + "as the sensor");
+
 
 		//query the db
 		PokedexEntry foundEntry = mPokedexLab.getEntry(entry);
@@ -511,11 +505,37 @@ public class GameFragment extends Fragment {
 			//We found a match ~ go through pokedex and discover it!
 			for(int i = 0; i < mPokedex.size(); i++)
 			{
-				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()))
+				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered())
 				{
 					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
 					mPokedex.get(i).setDiscovered(true);
-					Log.i(CHECK, mPokedex.get(i).getIngredient().getName() + " has been discovered: " + mPokedex.get(i).isDiscovered());
+					mPokedexLab.updatePokedex(mPokedex.get(i));
+				}
+			}
+			updateUI();
+			return foundEntry.getIngredient();
+		}
+
+		//We didn't make anything without sensors... now try with
+		if(isDark)
+		{
+			entry.setSensor("Dark");
+		}
+		//if(isFlipped)
+		//{
+		//	entry.set
+		//}
+
+		foundEntry = mPokedexLab.getEntry(entry);
+		if(foundEntry != null)
+		{
+			//We found a match ~ go through pokedex and discover it!
+			for(int i = 0; i < mPokedex.size(); i++)
+			{
+				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered())
+				{
+					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
+					mPokedex.get(i).setDiscovered(true);
 					mPokedexLab.updatePokedex(mPokedex.get(i));
 				}
 			}
@@ -533,6 +553,11 @@ public class GameFragment extends Fragment {
 			float ambientLight = event.values[0];
 			if(ambientLight < 30){
 				isDark = true;
+				checkMixer();
+			}
+			else
+			{
+				isDark = false;
 			}
 		}
 
