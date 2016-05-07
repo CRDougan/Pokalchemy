@@ -22,7 +22,7 @@
 
     <record name="Primeape" first="Mankey" second="" third="" sensor="Sound" type="POKEMON" image="ic_primeape" discovered="0" />
 
-    <record name="Geodude" first="Arms" second="Rock" third="Arms" sensor="" type="POKEMON" image="ic_geodude" discovered="0" />
+    <record name="Geodude" first="Arm" second="Rock" third="Arm" sensor="" type="POKEMON" image="ic_geodude" discovered="0" />
 
     <record name="Graveler" first="Geodude" second="Geodude" third="" sensor="" type="POKEMON" image="ic_graveler" discovered="0" />
 
@@ -30,7 +30,7 @@
 
     <record name="Ghastly" first="" second="" third="" sensor="Dark" type="POKEMON" image="ic_ghastly" discovered="0" />
 
-    <record name="Haunter" first="Arms" second="Ghastly" third="Arms" sensor="Dark" type="POKEMON" image="ic_haunter" discovered="0" />
+    <record name="Haunter" first="Arm" second="Ghastly" third="Arm" sensor="Dark" type="POKEMON" image="ic_haunter" discovered="0" />
 
     <record name="Gengar" first="Trainer" second="Haunter" third="Trainer" sensor="Dark" type="POKEMON" image="ic_gengar" discovered="0" />
 
@@ -78,7 +78,7 @@
 
     <!-- Other -->
     <record name="Hat" first="" second="" third="" sensor="" type="OTHER" image="ic_hat" discovered="1" />
-    <record name="Arms" first="" second="" third="" sensor="" type="OTHER" image="ic_arms" discovered="1" />
+    <record name="Arm" first="" second="" third="" sensor="" type="OTHER" image="ic_arm" discovered="1" />
     <!--<record name="Ball" first="" second="" third="" sensor="" type="OTHER" image="ic_ball" discovered="1" />-->
     <record name="Trainer" first="Hat" second="Human" third="" sensor="" type="OTHER" image="ic_ash" discovered="0" />
     <record name="Trainer" first="Human" second="Hat" third="" sensor="" type="OTHER" image="ic_ash" discovered="0" />
