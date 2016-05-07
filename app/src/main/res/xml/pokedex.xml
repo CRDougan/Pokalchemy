@@ -20,7 +20,6 @@
     <record name="Mankey" first="Human" second="Dinosaur" third="" sensor="" type="POKEMON" image="ic_mankey" discovered="0" />
     <record name="Mankey" first="Dinosaur" second="Human" third="" sensor="" type="POKEMON" image="ic_mankey" discovered="0" />
 
-    <record name="Primeape" first="Mankey" second="" third="" sensor="Sound" type="POKEMON" image="ic_primeape" discovered="0" />
     <record name="Primeape" first="Mankey" second="" third="" sensor="Shake" type="POKEMON" image="ic_primeape" discovered="0" />
 
     <record name="Geodude" first="Arm" second="Rock" third="Arm" sensor="" type="POKEMON" image="ic_geodude" discovered="0" />

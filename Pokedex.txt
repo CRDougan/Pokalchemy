@@ -1,0 +1,39 @@
+### This document is a list of all combinations to discover Pokemon in Pokalchemy
+# "Any order" indicates the ingredients do not need to be added in a specific order.
+# "In this order" indicates the ingredients must be added in this specific order.
+
+Bulbasaur	Grass		+	Dinosaur					(Any order)
+
+Charmander	Fire		+	Dinosaur					(Any order)
+
+Squirtle	Squirrel	+	Turtle						(In this order)
+
+Ekans		Snake														&	Rotate the device 180 degrees with the screen facing towards you
+Arbok		Snake		+	Poison						(Any order)		&	Rotate the device 180 degrees with the screen facing towards you
+
+Pikachu		Electric	+	Mouse						(Any order)
+
+Mankey		Human		+	Dinosaur					(Any order)
+Primeape	Mankey														&	Shake the device
+
+Geodude		Arm			+	Rock		+	Arm			(In this order)
+Graveler	Geodude		+	Geodude						
+Golem		Trainer		+	Graveler	+	Trainer		(In this order)
+
+Ghastly																	&	Dark ambient light
+Haunter		Arm			+	Ghastly		+	Arm			(In this order)	&	Dark ambient light
+Gengar		Trainer		+	Haunter		+	Trainer		(In this order)	&	Dark ambient light
+
+Onix		Rock		+	Rock		+	Rock		
+
+Aerodactyl	Rock		+	Bird		+	Dinosaur	(Any order)
+
+Articuno	Bird		+	Ice							(Any order)
+
+Zapdos		Bird		+	Electric					(Any order)
+
+Moltres		Bird		+	Fire						(Any order)
+
+Mewtwo		Mew			+	Mew							
+
+Mew			Available from start

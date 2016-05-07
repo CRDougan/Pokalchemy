@@ -6,7 +6,7 @@ import android.database.CursorWrapper;
 
 /**
  * Created by Connor on 5/3/2016.
- * A cursorWrapper wrapper
+ * A cursor wrapper
  * <p>The lets us get a row of data from our table</p>
  */
 public class PokedexCursorWrapper extends CursorWrapper{

@@ -1,4 +1,4 @@
-This document describes the usage instructions, known bugs, and any other things worth mentioning about the app.
+This document describes the usage instructions, known bugs, and any other things worth mentioning about the app in its Alpha Release Version.
 
 USAGE:
 The goal of our app is to combine ingrediants from different categories chosen at the top into new pokemon. To do this tap on one or more selection groups then tap on the ingredient you want to add to the mixing area. The ingredients will be automatically mixed once in the mixing area if they create a valid match.

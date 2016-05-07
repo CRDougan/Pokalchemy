@@ -107,7 +107,13 @@ public class PokedexBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
+    /**
+     * For upgrading the database
+     * <p>Unused</p>
+     * @param db the database
+     * @param oldVersion upgrade from
+     * @param newVersion upgrade to
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
