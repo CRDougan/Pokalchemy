@@ -364,6 +364,7 @@ public class GameFragment extends Fragment {
 					}
 				}
 			});
+
 		}
 
 		/**
@@ -376,6 +377,21 @@ public class GameFragment extends Fragment {
 			int id = getContext().getResources().getIdentifier(i.getImageID(), "drawable", getContext().getPackageName());
 			mButton.setImageResource(id);
 			mHolderIngredient = i;
+			switch (mHolderIngredient.getType())
+			{
+				case POKEMON:
+					mButton.setBackgroundColor(getResources().getColor(R.color.pokemon));
+					break;
+				case ANIMAL:
+					mButton.setBackgroundColor(getResources().getColor(R.color.animal));
+					break;
+				case ELEMENT:
+					mButton.setBackgroundColor(getResources().getColor(R.color.element));
+					break;
+				default:
+					mButton.setBackgroundColor(getResources().getColor(R.color.other));
+					break;
+			}
 		}
 
 		/**
