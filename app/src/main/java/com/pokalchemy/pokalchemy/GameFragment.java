@@ -14,6 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -50,18 +54,20 @@ public class GameFragment extends Fragment {
 	private boolean isShaking = false;
 	private long lastUpdate;
 	private double x, y , z, last_x, last_y, last_z;
+	private boolean isFlipped = false;
 
 	private Button mPokemon, mAnimals, mElements, mOther;
 	private ImageButton mTrash;
 	private FrameLayout mMixer;
 	private LinearLayout mMixingArea;
 	private boolean p_on = false, a_on = false, e_on = false, o_on = false;
+	private boolean pokedexOn = false;
 
 	private ArrayList<Ingredient> mMixerIngredients;
 
 	private PokedexLab mPokedexLab;
 	private ArrayList<PokedexEntry> mPokedex;
-
+	private OrientationEventListener mOrientationEventListener;
 
 	/**
 	 * Create new instance
@@ -84,6 +90,7 @@ public class GameFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_game, container, false);
+		setHasOptionsMenu(true);
 		mPokedexLab = PokedexLab.get(getContext());
 		mPokedex = (ArrayList<PokedexEntry>) mPokedexLab.getPokedex();
 
@@ -238,6 +245,20 @@ public class GameFragment extends Fragment {
 		mSensorManager.registerListener(accelSensorEventListener,
 				accelerometer,
 				SensorManager.SENSOR_DELAY_UI);
+		mOrientationEventListener = new OrientationEventListener(getContext(), mSensorManager.SENSOR_DELAY_UI) {
+			@Override
+			public void onOrientationChanged(int orientation) {
+				if (170 < orientation && 190 > orientation){
+					isFlipped = true;
+					Log.i("Orientation", "upside down");
+				}
+				else {
+					isFlipped = false;
+					Log.i("Orientation", "right side up");
+				}
+			}
+		};
+		mOrientationEventListener.enable();
 
 
 		mTrash = (ImageButton)v.findViewById(R.id.trash);
@@ -273,6 +294,42 @@ public class GameFragment extends Fragment {
 		return v;
 	}
 
+	/**
+	 * Creates the option menu for the fragment
+	 * <p>Adds the Pokedex button</p>
+	 * @param menu the menu to add buttons to
+	 * @param inflater the inflater
+	 */
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.fragment_game, menu);
+
+		MenuItem pokedexItem = menu.findItem(R.id.action_pokedex);
+	}
+
+
+	/**
+	 * A menu item was selected
+	 * <p>Handle our item being selected</p>
+	 * @param item
+	 * @return
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_pokedex:
+				pokedexOn = !pokedexOn;
+				if(pokedexOn)
+				{
+					Toast.makeText(getContext(), "All ingredients disabled while in Pokedex mode", Toast.LENGTH_LONG).show();
+				}
+				updateUI();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 
 	/**
 	 * Resume the Fragment
@@ -294,10 +351,21 @@ public class GameFragment extends Fragment {
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		for(PokedexEntry entry : mPokedex)
 		{
-			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON && entry.isDiscovered()) {
-				if(addIngredient(ingredients,entry))
+			if(entry.getIngredient().getType() == Ingredient.INGREDIENT_TYPE.POKEMON)
+			{
+
+				if (addIngredient(ingredients, entry))
 				{
-					ingredients.add(entry.getIngredient());
+					if(entry.isDiscovered())
+					{
+						entry.getIngredient().setImageID(entry.getIngredient().getOriginalImageID());
+						ingredients.add(entry.getIngredient());
+
+					}
+					else if (pokedexOn) {
+						entry.getIngredient().setImageID("ic_undiscovered");
+						ingredients.add(entry.getIngredient());
+					}
 				}
 			}
 		}
@@ -387,7 +455,6 @@ public class GameFragment extends Fragment {
 			mButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Log.d(LOG, "Clicked on Ingredient button");
 					if(mMixingArea.getChildCount() >= 3)
 					{
 						Toast.makeText(v.getContext(), "There are too many ingredients already. Cannot add more.", Toast.LENGTH_LONG).show();
@@ -405,6 +472,7 @@ public class GameFragment extends Fragment {
 							for (int i = 0; i < mMixerIngredients.size(); i++) {
 								if (mMixerIngredients.get(i).getName() == mHolderIngredient.getName()) {
 									mMixerIngredients.remove(i);
+									checkMixer();
 								}
 							}
 						}
@@ -418,6 +486,15 @@ public class GameFragment extends Fragment {
 					}
 				}
 			});
+
+			if(pokedexOn)
+			{
+				mButton.setEnabled(false);
+			}
+			else
+			{
+				mButton.setEnabled(true);
+			}
 
 		}
 
@@ -546,14 +623,13 @@ public class GameFragment extends Fragment {
 			//We found a match ~ go through pokedex and discover it!
 			for(int i = 0; i < mPokedex.size(); i++)
 			{
-				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered())
-				{
+				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered()) {
 					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
 					mPokedex.get(i).setDiscovered(true);
 					mPokedexLab.updatePokedex(mPokedex.get(i));
+					updateUI();
 				}
 			}
-			updateUI();
 			return foundEntry.getIngredient();
 		}
 
@@ -573,14 +649,13 @@ public class GameFragment extends Fragment {
 			//We found a match ~ go through pokedex and discover it!
 			for(int i = 0; i < mPokedex.size(); i++)
 			{
-				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered())
-				{
+				if(mPokedex.get(i).getIngredient().getName().equals(foundEntry.getIngredient().getName()) && !mPokedex.get(i).isDiscovered()) {
 					Toast.makeText(getContext(), "You discovered " + foundEntry.getIngredient().getName(), Toast.LENGTH_SHORT).show();
 					mPokedex.get(i).setDiscovered(true);
 					mPokedexLab.updatePokedex(mPokedex.get(i));
+					updateUI();
 				}
 			}
-			updateUI();
 			return foundEntry.getIngredient();
 		}
 
@@ -625,7 +700,7 @@ public class GameFragment extends Fragment {
 				double speed = Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 1000;
 
 				if(speed > SHAKE_THRESHOLD) {
-					Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
+					//Toast.makeText(getActivity(), "shake detected w/ speed: " + speed, Toast.LENGTH_SHORT).show();;
 					isShaking = true;
 				}
 				else {

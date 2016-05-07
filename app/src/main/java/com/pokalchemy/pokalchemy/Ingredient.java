@@ -6,6 +6,7 @@ package com.pokalchemy.pokalchemy;
  */
 public class Ingredient {
     private String mImageID;
+    private String mOriginalImageID;
     private String mName;
     private INGREDIENT_TYPE mType;
 
@@ -28,6 +29,7 @@ public class Ingredient {
         this.mImageID = other.getImageID();
         this.mName = other.getName();
         this.mType = other.getType();
+        this.mOriginalImageID = other.getOriginalImageID();
     }
 
     public String getImageID()
@@ -54,6 +56,14 @@ public class Ingredient {
 
     public void setType(INGREDIENT_TYPE mType) {
         this.mType = mType;
+    }
+
+    public String getOriginalImageID() {
+        return mOriginalImageID;
+    }
+
+    public void setOriginalImageID(String mOriginalImageID) {
+        this.mOriginalImageID = mOriginalImageID;
     }
 
     public enum INGREDIENT_TYPE {POKEMON, ANIMAL, ELEMENT, OTHER};

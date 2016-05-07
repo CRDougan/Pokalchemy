@@ -29,12 +29,21 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         return TAG;
     }
 
+    /**
+     * Gets the id of the layout
+     * @return int layout resource id
+     */
+
     @LayoutRes
     protected int getLayoutResId() {
         Log.d( getTag(), "getLayoutResId() returning activity_fragment by default" );
         return R.layout.activity_fragment;
     }
 
+    /**
+     *  initializes all of the fragments needed
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -56,30 +65,45 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * starts the activity
+     */
     @Override
     public void onStart() {
         super.onStart();
         Log.d( getTag(), "onStart() called" );
     }
 
+    /**
+     * Pauses the activity
+     */
     @Override
     public void onPause() {
         super.onPause();
         Log.d( getTag(), "onPause() called" );
     }
 
+    /**
+     * Resumes the app
+     */
     @Override
     public void onResume() {
         super.onResume();
         Log.d( getTag(), "onResume() called" );
     }
 
+    /**
+     * Stops the app
+     */
     @Override
     public void onStop() {
         super.onStop();
         Log.d( getTag(), "onStop() called" );
     }
 
+    /**
+     * Destroys the app
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

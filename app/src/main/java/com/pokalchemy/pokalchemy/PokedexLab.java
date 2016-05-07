@@ -38,7 +38,7 @@ public class PokedexLab {
 
     /**
      * PokedexLab constructor
-     * <p>Sets the context and makes a new list of pokedexs</p>
+     * <p>Sets the context and makes a new list of pokedexes</p>
      * @param context the context
      */
     private PokedexLab(Context context){
@@ -48,8 +48,8 @@ public class PokedexLab {
 
 
     /**
-     * Add a pokedex to our list of pokedexs
-     * <p>Add a pokedex to our list of pokedexs</p>
+     * Add a pokedex to our list of pokedexes
+     * <p>Add a pokedex to our list of pokedexes</p>
      * @param p the pokedex to add
      */
     public void addPokedex(PokedexEntry p){
@@ -61,22 +61,9 @@ public class PokedexLab {
     }
 
     /**
-     * Remove a pokedex from our list of pokedexs
-     * <p>Remove a pokedex from our list of pokedexs</p>
-     * @param p the pokedex to remove
-     */
-    public void removePokedex(PokedexEntry p){
-//        for(int i = 0; i < mPokedexs.size(); i++){
-//            if(c.getUUID().equals(mPokedexs.get(i).getUUID())){
-//                mPokedexs.remove(i);
-//            }
-//        }
-    }
-
-    /**
-     * get list of pokedexs
-     * <p>get list of pokedexs</p>
-     * @return list of pokedexs
+     * get list of pokedexes
+     * <p>get list of pokedexes</p>
+     * @return list of pokedexes
      */
     public List<PokedexEntry> getPokedex() {
         List<PokedexEntry> pokedex = new ArrayList<>();
@@ -99,8 +86,8 @@ public class PokedexLab {
     }
 
     /**
-     * get a pokedex form our list of pokedexs
-     * <p>get a pokedex form our list of pokedexs</p>
+     * get a pokedex form our list of pokedexes
+     * <p>get a pokedex form our list of pokedexes</p>
      * @param entry the pokedex entry
      * @return the pokedex
      */
@@ -171,7 +158,7 @@ public class PokedexLab {
         }
 
 
-        values.put(PokedexDBSchema.PokedexTable.Cols.IMAGE, pokedex.getIngredient().getImageID());
+        values.put(PokedexDBSchema.PokedexTable.Cols.IMAGE, pokedex.getIngredient().getOriginalImageID());
         values.put(PokedexDBSchema.PokedexTable.Cols.DISCOVERED, pokedex.isDiscovered());
 
         return values;
