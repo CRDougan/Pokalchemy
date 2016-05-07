@@ -171,7 +171,7 @@ public class PokedexLab {
         }
 
 
-        values.put(PokedexDBSchema.PokedexTable.Cols.IMAGE, pokedex.getIngredient().getImageID());
+        values.put(PokedexDBSchema.PokedexTable.Cols.IMAGE, pokedex.getIngredient().getOriginalImageID());
         values.put(PokedexDBSchema.PokedexTable.Cols.DISCOVERED, pokedex.isDiscovered());
 
         return values;

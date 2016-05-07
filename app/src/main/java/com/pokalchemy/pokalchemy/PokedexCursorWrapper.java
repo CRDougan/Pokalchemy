@@ -38,6 +38,7 @@ public class PokedexCursorWrapper extends CursorWrapper{
             Ingredient ingredient = new Ingredient();
             ingredient.setName(name);
             ingredient.setImageID(image);
+            ingredient.setOriginalImageID(image);
             switch (type)
             {
                 case "POKEMON":
