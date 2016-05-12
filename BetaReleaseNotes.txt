@@ -4,10 +4,11 @@ USAGE:
 The goal of our app is to combine ingrediants from different categories chosen at the top into pokemon. To do this tap on one or more selection groups then tap on the ingredients you want to add to the mixing area. The ingredients will be automatically mixed once in the mixing area if they create a valid combination. To remove individual ingredients from the mixing area, tap on them or tap the trash can at the bottom to remove all ingredients in the mixing area. The player "wins" when they have discovered all the Pokemon. If we had more time to add combinations, this game would have the player discover all 151 original Pokemon. Currently the end goal is to discover the 26 that are available.
 
 BUGS:
-
+No known bugs.
 
 NOTE:
 You are limited to having 3 ingredients in the mixing area at a time because no combination requires more than 3 ingredients.
 Sensors for light level, shaking the device, and rotating the device are also used in conjunction with ingredients in the mixing area to discover Pokemon.
 Some combinations require 0 ingredients in the mixing area and use one or more sensors described above.
+Selecting Pokedex from the drop down menu at the top shows question marks for all the undiscovered Pokemon and other ingredients and doesn't allow ingredients to be selected. This is to avoid a bug where you can use ingredients you haven't discovered yet to discover Pokemon you shouldn't be able to. We tried fixing this another way and it caused more bugs to appear we didn't have time to deal with.
 For a full list of how to get each Pokemon in Pokalchemy, see Pokedex.txt.
