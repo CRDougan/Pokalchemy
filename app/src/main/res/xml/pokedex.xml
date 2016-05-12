@@ -25,7 +25,7 @@
     <record name="Machop" first="Machamp" second="Machamp" third="" sensor="" type="POKEMON" image="ic_machop" discovered="0" />
 
     <record name="Machoke" first="Machop" second="Poison" third="" sensor="" type="POKEMON" image="ic_machoke" discovered="0" />
-    <record name="Machoke" first="Machop" second="Poison" third="" sensor="" type="POKEMON" image="ic_machoke" discovered="0" />
+    <record name="Machoke" first="Poison" second="Machop" third="" sensor="" type="POKEMON" image="ic_machoke" discovered="0" />
 
     <record name="Machamp" first="Arm" second="Human" third="Arm" sensor="" type="POKEMON" image="ic_machamp" discovered="0" />
 
